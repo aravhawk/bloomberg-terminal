@@ -143,11 +143,11 @@ export function CommandBar() {
 
   return (
     <div className="relative bg-bloomberg-panel border-b border-bloomberg-border shrink-0">
-      <div className="flex items-center h-8 px-2 gap-2">
-        <span className="text-bloomberg-amber font-bold text-xs tracking-wider shrink-0">
+      <div className="flex items-center h-7 px-2 gap-2">
+        <span className="text-bloomberg-brand-green font-bold text-[10px] tracking-widest shrink-0">
           BLOOMBERG
         </span>
-        <span className="text-bloomberg-amber shrink-0">{">"}</span>
+        <span className="text-bloomberg-brand-green shrink-0 text-[10px]">{">"}</span>
         <input
           ref={inputRef}
           type="text"
@@ -157,10 +157,11 @@ export function CommandBar() {
           onFocus={() => setCommandFocused(true)}
           onBlur={() => setTimeout(() => { setCommandFocused(false); setShowDropdown(false); }, 200)}
           placeholder="Enter command or security..."
-          className="flex-1 bg-transparent text-bloomberg-amber font-mono text-sm outline-none placeholder:text-bloomberg-muted caret-bloomberg-amber"
+          className="flex-1 bg-transparent text-bloomberg-amber font-mono text-[11px] outline-none placeholder:text-bloomberg-muted caret-bloomberg-amber"
           autoComplete="off"
           spellCheck={false}
         />
+        <span className="text-bloomberg-amber text-[9px] font-bold shrink-0 opacity-60">GO</span>
         <div className="flex gap-1 shrink-0">
           {(["A", "B", "C", "D"] as const).map((group) => (
             <button
@@ -169,7 +170,7 @@ export function CommandBar() {
                 const panel = panels.find((p) => p.group === group);
                 if (panel) setActivePanelId(panel.id);
               }}
-              className={`w-5 h-5 flex items-center justify-center text-[10px] font-bold border ${
+              className={`w-4 h-4 flex items-center justify-center text-[9px] font-bold border ${
                 activePanel?.group === group
                   ? "bg-bloomberg-amber text-bloomberg-black border-bloomberg-amber"
                   : "bg-bloomberg-panel-alt text-bloomberg-muted border-bloomberg-border hover:border-bloomberg-amber"

@@ -26,16 +26,16 @@ export function ERN({ security }: { security?: Security | null }) {
   }));
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — EARNINGS</div>
       <div className="border border-bloomberg-border p-1">
-        <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-1 mb-1">EPS Surprise</div>
+        <div className="text-[9px] text-bloomberg-amber font-bold uppercase px-1 mb-0.5">EPS Surprise</div>
         <BarChartComponent data={chartData} height={180} showColors />
       </div>
       {epsTrendData.length > 0 && (
         <div className="border border-bloomberg-border p-1">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-1 mb-1">EPS Trend</div>
-          <LineChart data={epsTrendData} dataKey="value" height={150} color="#ff8c00" />
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase px-1 mb-0.5">EPS Trend</div>
+          <LineChart data={epsTrendData} dataKey="value" height={150} color="#fb8b1e" />
         </div>
       )}
       <div className="border border-bloomberg-border">

@@ -11,20 +11,20 @@ interface PriceDisplayProps {
 export function PriceDisplay({ price, change, changePercent, currency = "USD", size = "md" }: PriceDisplayProps) {
   const changeColor = getChangeColor(change);
   const sizeClasses = {
-    sm: "text-sm",
-    md: "text-lg",
-    lg: "text-xl",
+    sm: "text-xs",
+    md: "text-base",
+    lg: "text-lg",
   };
 
   return (
-    <div className="flex items-baseline gap-2">
+    <div className="flex items-baseline gap-1.5">
       <span className={`font-bold text-bloomberg-white ${sizeClasses[size]}`}>
         {currency === "USD" ? "$" : ""}{formatPrice(price)}
       </span>
-      <span className={`${changeColor} text-sm font-medium`}>
+      <span className={`${changeColor} text-xs font-medium`}>
         {formatChange(change)}
       </span>
-      <span className={`${changeColor} text-sm`}>
+      <span className={`${changeColor} text-xs`}>
         ({formatPercent(changePercent)})
       </span>
     </div>

@@ -16,7 +16,7 @@ export function COMP({ security }: { security?: Security | null }) {
   const peerData = data?.peerData || [];
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — COMPARABLE COMPANIES</div>
       <div className="border border-bloomberg-border overflow-auto">
         <table className="bb-table">

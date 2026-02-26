@@ -56,7 +56,7 @@ export function FXMonitor({ security }: { security?: Security | null }) {
   }[];
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="flex items-center gap-2 mb-1">
         <div className="bb-section-header flex-1">FX MONITOR</div>
         <label className="text-[10px] text-bloomberg-muted">BASE:</label>

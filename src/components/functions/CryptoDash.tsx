@@ -36,7 +36,7 @@ export function CryptoDash({ security }: { security?: Security | null }) {
     : [];
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">CRYPTOCURRENCY MARKET</div>
 
       {/* Global Market Overview Banner */}

@@ -18,7 +18,7 @@ export function CommodityDash({ security }: { security?: Security | null }) {
   if (isLoading) return <LoadingState />;
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">COMMODITY PRICES</div>
       {CATEGORIES.map((cat) => {
         const items = (commodities || []).filter((c) => c.category === cat.key);

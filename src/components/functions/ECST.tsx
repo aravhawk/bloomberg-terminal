@@ -39,7 +39,7 @@ export function ECST({ security }: { security?: Security | null }) {
   const selectedChartData = [...selectedData].reverse().map((obs) => ({ date: obs.date, value: obs.value }));
 
   return (
-    <div className="p-2 space-y-3 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">ECONOMIC STATISTICS</div>
 
       {/* Card Grid */}
@@ -126,7 +126,7 @@ export function ECST({ security }: { security?: Security | null }) {
             <LoadingState />
           ) : selectedChartData.length > 0 ? (
             <div className="border border-bloomberg-border p-2">
-              <LineChart data={selectedChartData} dataKey="value" height={300} color="#ff8c00" />
+              <LineChart data={selectedChartData} dataKey="value" height={300} color="#fb8b1e" />
             </div>
           ) : (
             <div className="text-bloomberg-muted text-xs py-4 text-center">No data available for this indicator</div>

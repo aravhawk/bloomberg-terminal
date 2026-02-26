@@ -13,7 +13,7 @@ export function BarChartComponent({
   data,
   height = 250,
   dataKey = "value",
-  color = "#ff8c00",
+  color = "#fb8b1e",
   showColors = false,
 }: BarChartComponentProps) {
   return (
@@ -29,7 +29,7 @@ export function BarChartComponent({
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11,
           }}
-          labelStyle={{ color: "#ff8c00" }}
+          labelStyle={{ color: "#fb8b1e" }}
         />
         <Bar dataKey={dataKey} radius={[2, 2, 0, 0]}>
           {showColors

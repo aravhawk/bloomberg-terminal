@@ -9,7 +9,7 @@ interface LineChartProps {
   showGrid?: boolean;
 }
 
-export function LineChart({ data, height = 300, dataKey = "value", color = "#ff8c00", showGrid = true }: LineChartProps) {
+export function LineChart({ data, height = 300, dataKey = "value", color = "#fb8b1e", showGrid = true }: LineChartProps) {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <RechartsLine data={data}>
@@ -23,7 +23,7 @@ export function LineChart({ data, height = 300, dataKey = "value", color = "#ff8
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11,
           }}
-          labelStyle={{ color: "#ff8c00" }}
+          labelStyle={{ color: "#fb8b1e" }}
         />
         <Line type="monotone" dataKey={dataKey} stroke={color} dot={false} strokeWidth={1.5} />
       </RechartsLine>

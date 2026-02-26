@@ -17,7 +17,7 @@ export function WEI({ security }: { security?: Security | null }) {
   if (isLoading) return <LoadingState />;
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">WORLD EQUITY INDICES</div>
       {REGIONS.map((region) => {
         const indices = (data || []).filter((idx: Record<string, unknown>) => idx.region === region.key);

@@ -66,11 +66,11 @@ export function MOV({ security }: { security?: Security | null }) {
   };
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">{symbol} -- PRICE MOVEMENT</div>
 
       {/* Price Display */}
-      <div className="border border-bloomberg-border p-3">
+      <div className="border border-bloomberg-border p-2">
         <PriceDisplay
           price={quote.price}
           change={quote.change}
@@ -80,11 +80,11 @@ export function MOV({ security }: { security?: Security | null }) {
       </div>
 
       {/* Day Range */}
-      <div className="border border-bloomberg-border p-2">
-        <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
+      <div className="border border-bloomberg-border p-1">
+        <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">
           Day Range
         </div>
-        <div className="flex items-center gap-2 text-xs">
+        <div className="flex items-center gap-1 text-xs">
           <span className="text-bloomberg-muted">${formatPrice(quote.low)}</span>
           <div className="flex-1 h-2 bg-bloomberg-panel-alt rounded relative">
             <div
@@ -98,8 +98,8 @@ export function MOV({ security }: { security?: Security | null }) {
 
       {/* 52-Week Range */}
       {candles && candles.length > 0 && (
-        <div className="border border-bloomberg-border p-2">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">
             52-Week Range
           </div>
           {(() => {
@@ -110,7 +110,7 @@ export function MOV({ security }: { security?: Security | null }) {
                 ? ((quote.price - low52) / (high52 - low52)) * 100
                 : 50;
             return (
-              <div className="flex items-center gap-2 text-xs">
+              <div className="flex items-center gap-1 text-xs">
                 <span className="text-bloomberg-muted">
                   ${formatPrice(low52)}
                 </span>
@@ -138,19 +138,19 @@ export function MOV({ security }: { security?: Security | null }) {
 
       {/* Period Returns */}
       {candles && candles.length > 0 && (
-        <div className="border border-bloomberg-border p-2">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">
             Period Returns
           </div>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-4 gap-1">
             {PERIOD_LABELS.map(({ label, days }) => {
               const ret = getReturn(days);
               return (
                 <div
                   key={label}
-                  className="border border-bloomberg-border/50 p-2 rounded text-center"
+                  className="border border-bloomberg-border/50 p-1 rounded text-center"
                 >
-                  <div className="text-[10px] text-bloomberg-muted mb-1">
+                  <div className="text-[9px] text-bloomberg-muted mb-0.5">
                     {label}
                   </div>
                   <div
@@ -166,11 +166,11 @@ export function MOV({ security }: { security?: Security | null }) {
       )}
 
       {/* Key Data */}
-      <div className="border border-bloomberg-border p-2">
-        <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
+      <div className="border border-bloomberg-border p-1">
+        <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">
           Key Data
         </div>
-        <div className="grid grid-cols-2 gap-2 text-xs">
+        <div className="grid grid-cols-2 gap-1 text-xs">
           <div className="flex justify-between">
             <span className="text-bloomberg-muted">Open</span>
             <span>${formatPrice(quote.open)}</span>
@@ -204,8 +204,8 @@ export function MOV({ security }: { security?: Security | null }) {
 
       {/* Volatility */}
       {candles && candles.length > 20 && (
-        <div className="border border-bloomberg-border p-2">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">
             Volatility
           </div>
           {(() => {
@@ -226,7 +226,7 @@ export function MOV({ security }: { security?: Security | null }) {
             const annualVol = dailyVol * Math.sqrt(252) * 100;
 
             return (
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="grid grid-cols-2 gap-1 text-xs">
                 <div className="flex justify-between">
                   <span className="text-bloomberg-muted">
                     Hist. Volatility (Ann.)

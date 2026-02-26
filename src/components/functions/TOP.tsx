@@ -16,44 +16,48 @@ export function TOP({ security }: { security?: Security | null }) {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="flex items-center gap-1 p-1 border-b border-bloomberg-border shrink-0">
+      <div className="flex items-center gap-1 px-1 py-0.5 border-b border-bloomberg-border shrink-0">
+        <span className="text-[9px] text-bloomberg-amber font-bold mr-1">TOP NEWS</span>
         {CATEGORIES.map((cat) => (
-          <button key={cat} onClick={() => { setCategory(cat); setSelectedId(null); }} className={`bb-btn text-[10px] ${category === cat ? "bb-btn-active" : ""}`}>
+          <button key={cat} onClick={() => { setCategory(cat); setSelectedId(null); }} className={`bb-btn text-[9px] ${category === cat ? "bb-btn-active" : ""}`}>
             {cat}
           </button>
         ))}
-        {security && <span className="text-bloomberg-amber text-xs ml-2">{security.symbol}</span>}
+        {security && <span className="text-bloomberg-amber text-[10px] ml-auto">{security.symbol}</span>}
       </div>
 
       {isLoading ? <LoadingState /> : (
         <div className="flex-1 flex flex-col min-h-0">
           <div className="flex-1 overflow-auto">
-            {(articles || []).map((article) => (
+            {(articles || []).map((article, idx) => (
               <div
                 key={article.id}
                 onClick={() => setSelectedId(article.id)}
-                className={`flex items-start gap-2 px-2 py-1 cursor-pointer border-b border-bloomberg-border/30 hover:bg-bloomberg-panel-alt ${selectedId === article.id ? "bg-bloomberg-panel-alt" : ""}`}
+                className={`flex items-start gap-1.5 px-1 py-px cursor-pointer border-b border-bloomberg-border/20 hover:bg-bloomberg-panel-alt ${selectedId === article.id ? "bg-bloomberg-panel-alt" : ""}`}
               >
-                <span className="text-[10px] text-bloomberg-muted shrink-0 w-16">
+                <span className="text-[9px] text-bloomberg-muted shrink-0 w-4 text-right">
+                  {idx + 1}
+                </span>
+                <span className="text-[9px] text-bloomberg-muted shrink-0 w-12">
                   {article.datetime ? formatRelativeTime(article.datetime * 1000) : ""}
                 </span>
-                <span className="text-[10px] text-bloomberg-cyan font-bold shrink-0 w-12 uppercase truncate">
+                <span className="text-[9px] text-bloomberg-cyan font-bold shrink-0 w-10 uppercase truncate">
                   {article.source?.slice(0, 6)}
                 </span>
-                <span className="text-xs text-bloomberg-white truncate">{article.headline}</span>
+                <span className="text-[10px] text-bloomberg-white truncate">{article.headline}</span>
               </div>
             ))}
           </div>
 
           {selected && (
-            <div className="border-t border-bloomberg-border p-2 max-h-[30%] overflow-auto shrink-0 bg-bloomberg-panel">
-              <div className="text-xs text-bloomberg-amber font-bold mb-1">{selected.headline}</div>
-              <div className="text-[11px] text-bloomberg-white leading-relaxed mb-2">{selected.summary}</div>
-              <div className="flex items-center gap-3 text-[10px]">
+            <div className="border-t border-bloomberg-amber p-1.5 max-h-[35%] overflow-auto shrink-0 bg-bloomberg-panel">
+              <div className="text-[10px] text-bloomberg-amber font-bold mb-0.5">{selected.headline}</div>
+              <div className="text-[10px] text-bloomberg-white leading-tight mb-1">{selected.summary}</div>
+              <div className="flex items-center gap-2 text-[9px]">
                 <span className="text-bloomberg-cyan">{selected.source}</span>
                 {selected.url && (
                   <a href={selected.url} target="_blank" rel="noopener noreferrer" className="text-bloomberg-blue hover:underline">
-                    Open article
+                    Full Article
                   </a>
                 )}
               </div>

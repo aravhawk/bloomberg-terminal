@@ -15,7 +15,7 @@ export function Settings({ security }: { security?: Security | null }) {
   } = useSettingsStore();
 
   return (
-    <div className="p-2 space-y-3 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">TERMINAL SETTINGS</div>
 
       <div className="border border-bloomberg-border p-3 space-y-3">

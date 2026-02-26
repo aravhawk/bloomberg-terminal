@@ -23,19 +23,19 @@ export function ANR({ security }: { security?: Security | null }) {
   const consensusColor = consensus === "BUY" ? "text-bloomberg-green" : consensus === "SELL" ? "text-bloomberg-red" : "text-bloomberg-amber";
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — ANALYST RECOMMENDATIONS</div>
 
-      <div className="grid grid-cols-2 gap-2">
-        <div className="border border-bloomberg-border p-3 text-center">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">Consensus</div>
+      <div className="grid grid-cols-2 gap-1">
+        <div className="border border-bloomberg-border p-2 text-center">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">Consensus</div>
           <div className={`text-2xl font-bold ${consensusColor}`}>{consensus}</div>
           <div className="text-xs text-bloomberg-muted mt-1">{total} analysts</div>
         </div>
 
         {pt && (
-          <div className="border border-bloomberg-border p-3">
-            <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">Price Target</div>
+          <div className="border border-bloomberg-border p-2">
+            <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">Price Target</div>
             <div className="space-y-1 text-xs">
               <div className="flex justify-between"><span className="text-bloomberg-muted">Current:</span><span>${formatPrice(quote?.price || 0)}</span></div>
               <div className="flex justify-between"><span className="text-bloomberg-muted">Mean:</span><span className="text-bloomberg-amber">${formatPrice(pt.targetMean)}</span></div>
@@ -45,8 +45,8 @@ export function ANR({ security }: { security?: Security | null }) {
             </div>
             {quote && (
               <div className="mt-2">
-                <div className="text-[10px] text-bloomberg-muted mb-1">PRICE TARGET RANGE</div>
-                <div className="flex items-center gap-2 text-[10px]">
+                <div className="text-[9px] text-bloomberg-muted mb-0.5">PRICE TARGET RANGE</div>
+                <div className="flex items-center gap-2 text-[9px]">
                   <span className="text-bloomberg-red">${formatPrice(pt.targetLow)}</span>
                   <div className="flex-1 h-3 bg-bloomberg-panel-alt rounded relative">
                     {/* Mean target marker */}
@@ -63,9 +63,9 @@ export function ANR({ security }: { security?: Security | null }) {
       </div>
 
       {latest && (
-        <div className="border border-bloomberg-border p-2">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">Rating Distribution</div>
-          <div className="flex h-6 gap-0.5 mb-2">
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-1">Rating Distribution</div>
+          <div className="flex h-6 gap-0.5 mb-1">
             {[
               { val: latest.strongBuy, color: "bg-bloomberg-green", label: "Strong Buy" },
               { val: latest.buy, color: "bg-bloomberg-green/70", label: "Buy" },
@@ -92,7 +92,7 @@ export function ANR({ security }: { security?: Security | null }) {
 
       {recs.length > 0 && (
         <div className="border border-bloomberg-border">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-2 py-1">History</div>
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase px-2 py-1">History</div>
           <table className="bb-table">
             <thead>
               <tr>

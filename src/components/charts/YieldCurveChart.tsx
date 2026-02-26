@@ -26,14 +26,14 @@ export function YieldCurveChart({ data, height = 250 }: YieldCurveChartProps) {
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11,
           }}
-          labelStyle={{ color: "#ff8c00" }}
+          labelStyle={{ color: "#fb8b1e" }}
           formatter={(value?: number) => [`${(value ?? 0).toFixed(3)}%`, "Yield"]}
         />
         <Line
           type="monotone"
           dataKey="yield"
-          stroke="#ff8c00"
-          dot={{ fill: "#ff8c00", r: 3 }}
+          stroke="#fb8b1e"
+          dot={{ fill: "#fb8b1e", r: 3 }}
           strokeWidth={2}
         />
       </LineChart>

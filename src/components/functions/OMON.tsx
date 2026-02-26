@@ -24,7 +24,7 @@ export function OMON({ security }: { security?: Security | null }) {
   if (isLoading) return <LoadingState />;
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="flex items-center gap-2">
         <div className="bb-section-header flex-1">OPTIONS MONITOR - {symbol}</div>
         {chain?.underlyingPrice && (

@@ -32,13 +32,13 @@ export function FA({ security }: { security?: Security | null }) {
     <div className="flex flex-col h-full overflow-hidden">
       <div className="flex items-center gap-1 p-1 border-b border-bloomberg-border shrink-0 flex-wrap">
         {STATEMENTS.map((s) => (
-          <button key={s.key} onClick={() => setStatement(s.key)} className={`bb-btn text-[10px] ${statement === s.key ? "bb-btn-active" : ""}`}>
+          <button key={s.key} onClick={() => setStatement(s.key)} className={`bb-btn text-[9px] ${statement === s.key ? "bb-btn-active" : ""}`}>
             {s.label}
           </button>
         ))}
         <span className="text-bloomberg-border mx-1">|</span>
-        <button onClick={() => setPeriod("annual")} className={`bb-btn text-[10px] ${period === "annual" ? "bb-btn-active" : ""}`}>Annual</button>
-        <button onClick={() => setPeriod("quarter")} className={`bb-btn text-[10px] ${period === "quarter" ? "bb-btn-active" : ""}`}>Quarterly</button>
+        <button onClick={() => setPeriod("annual")} className={`bb-btn text-[9px] ${period === "annual" ? "bb-btn-active" : ""}`}>Annual</button>
+        <button onClick={() => setPeriod("quarter")} className={`bb-btn text-[9px] ${period === "quarter" ? "bb-btn-active" : ""}`}>Quarterly</button>
       </div>
 
       {isLoading ? (
@@ -59,7 +59,7 @@ export function FA({ security }: { security?: Security | null }) {
             <tbody>
               {fields.map((field) => (
                 <tr key={field}>
-                  <td className="sticky left-0 bg-bloomberg-black text-bloomberg-amber text-[10px] font-bold uppercase">
+                  <td className="sticky left-0 bg-bloomberg-black text-bloomberg-amber text-[9px] font-bold uppercase">
                     {field.replace(/([A-Z])/g, " $1").trim()}
                   </td>
                   {rows.map((r: Record<string, unknown>, i: number) => {

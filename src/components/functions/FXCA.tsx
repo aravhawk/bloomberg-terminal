@@ -49,7 +49,7 @@ export function FXCA({ security }: { security?: Security | null }) {
   };
 
   return (
-    <div className="p-2 space-y-3 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">FX CURRENCY CALCULATOR</div>
       <div className="border border-bloomberg-border p-3 space-y-3">
         <div className="flex items-end gap-3">

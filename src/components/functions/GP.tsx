@@ -116,45 +116,43 @@ export function GP({ security }: { security?: Security | null }) {
   };
 
   if (!security) {
-    return <div className="flex items-center justify-center h-full text-bloomberg-amber text-sm">Enter a security in the command bar (e.g., AAPL)</div>;
+    return <div className="flex items-center justify-center h-full text-bloomberg-amber text-[11px]">Enter a security in the command bar (e.g., AAPL &lt;GO&gt;)</div>;
   }
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Toolbar row: timeframe + chart type + indicators */}
-      <div className="flex items-center gap-1 p-1 border-b border-bloomberg-border shrink-0 flex-wrap">
+      <div className="flex items-center gap-0.5 px-1 py-0.5 border-b border-bloomberg-border shrink-0 flex-wrap">
         {TIMEFRAME_CONFIG.map(({ value: tf }) => (
           <button
             key={tf}
             onClick={() => setTimeframe(tf)}
-            className={`bb-btn text-[10px] px-2 py-0.5 ${timeframe === tf ? "bb-btn-active" : ""}`}
+            className={`bb-btn text-[9px] px-1.5 py-0 ${timeframe === tf ? "bb-btn-active" : ""}`}
           >
             {tf}
           </button>
         ))}
 
-        <span className="w-px h-4 bg-bloomberg-border mx-1" />
+        <span className="w-px h-3 bg-bloomberg-border mx-0.5" />
 
         {(["candle", "line", "area"] as const).map((ct) => (
           <button
             key={ct}
             onClick={() => setChartType(ct)}
-            className={`bb-btn text-[10px] px-2 py-0.5 uppercase ${chartType === ct ? "bb-btn-active" : ""}`}
+            className={`bb-btn text-[9px] px-1.5 py-0 uppercase ${chartType === ct ? "bb-btn-active" : ""}`}
           >
             {ct}
           </button>
         ))}
 
-        <span className="w-px h-4 bg-bloomberg-border mx-1" />
+        <span className="w-px h-3 bg-bloomberg-border mx-0.5" />
 
         <button
           onClick={() => setShowAddForm((v) => !v)}
-          className="bb-btn text-[10px] px-2 py-0.5"
+          className="bb-btn text-[9px] px-1.5 py-0"
         >
-          + Add
+          +IND
         </button>
-
-        <span className="text-bloomberg-amber text-xs font-bold ml-2">{symbol}</span>
       </div>
 
       {/* Add indicator form */}
@@ -232,7 +230,7 @@ export function GP({ security }: { security?: Security | null }) {
               <LineChart
                 data={lineData}
                 dataKey="value"
-                color="#ff8c00"
+                color="#fb8b1e"
                 height={rsiData || macdData ? 300 : 400}
               />
             ) : (
@@ -255,7 +253,7 @@ export function GP({ security }: { security?: Security | null }) {
                     <YAxis stroke="#888" fontSize={9} tickLine={false} width={40} domain={[0, 100]} ticks={[0, 30, 50, 70, 100]} />
                     <Tooltip
                       contentStyle={{ background: "#111", border: "1px solid #333", fontFamily: "'JetBrains Mono', monospace", fontSize: 10 }}
-                      labelStyle={{ color: "#ff8c00" }}
+                      labelStyle={{ color: "#fb8b1e" }}
                     />
                     <ReferenceLine y={70} stroke="#ff3b3b" strokeDasharray="3 3" strokeOpacity={0.6} />
                     <ReferenceLine y={30} stroke="#00d26a" strokeDasharray="3 3" strokeOpacity={0.6} />
@@ -278,7 +276,7 @@ export function GP({ security }: { security?: Security | null }) {
                     <YAxis stroke="#888" fontSize={9} tickLine={false} width={40} />
                     <Tooltip
                       contentStyle={{ background: "#111", border: "1px solid #333", fontFamily: "'JetBrains Mono', monospace", fontSize: 10 }}
-                      labelStyle={{ color: "#ff8c00" }}
+                      labelStyle={{ color: "#fb8b1e" }}
                     />
                     <Bar dataKey="histogram" fill="#555" />
                     <Line type="monotone" dataKey="macd" stroke="#00BCD4" dot={false} strokeWidth={1} />
@@ -294,7 +292,7 @@ export function GP({ security }: { security?: Security | null }) {
       </div>
 
       {/* OHLCV info bar */}
-      <div className="flex items-center gap-4 px-2 py-1 border-t border-bloomberg-border text-xs shrink-0 bg-bloomberg-panel">
+      <div className="flex items-center gap-3 px-1 py-0.5 border-t border-bloomberg-border text-[10px] shrink-0 bg-bloomberg-panel">
         {crosshairData ? (
           <>
             <span><span className="text-bloomberg-amber">O:</span> {formatPrice(crosshairData.open)}</span>

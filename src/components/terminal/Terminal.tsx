@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { CommandBar } from "./CommandBar";
+import { FunctionKeyBar } from "./FunctionKeyBar";
 import { PanelManager } from "./PanelManager";
 import { StatusBar } from "./StatusBar";
 import { useTerminalStore } from "@/store/terminalStore";
@@ -19,6 +20,7 @@ export function Terminal() {
   return (
     <div className="h-screen w-screen flex flex-col bg-bloomberg-black overflow-hidden font-mono">
       <CommandBar />
+      <FunctionKeyBar />
       <PanelManager />
       <StatusBar />
     </div>

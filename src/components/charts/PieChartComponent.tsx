@@ -8,7 +8,7 @@ interface PieChartComponentProps {
   outerRadius?: number;
 }
 
-const COLORS = ["#ff8c00", "#00bcd4", "#4da6ff", "#00d26a", "#ffd700", "#ff3b3b", "#888888", "#cc7000"];
+const COLORS = ["#fb8b1e", "#4af6c3", "#0068ff", "#00d26a", "#ffd700", "#ff433d", "#888888", "#c97016"];
 
 export function PieChartComponent({ data, height = 250, innerRadius = 40, outerRadius = 80 }: PieChartComponentProps) {
   return (

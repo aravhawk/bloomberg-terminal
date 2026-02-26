@@ -38,7 +38,7 @@ export function Watchlist({ security }: { security?: Security | null }) {
   };
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="flex items-center gap-2 mb-1">
         <div className="bb-section-header flex-1">WATCHLIST</div>
         <select value={activeWatchlistId} onChange={(e) => setActiveWatchlist(e.target.value)} className="bb-input text-xs">

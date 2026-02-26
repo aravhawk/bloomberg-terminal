@@ -54,7 +54,7 @@ export function PORT({ security }: { security?: Security | null }) {
   });
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="flex items-center gap-2 mb-1">
         <div className="bb-section-header flex-1">PORTFOLIO MANAGER</div>
         <select value={activePortfolioId} onChange={(e) => setActivePortfolio(e.target.value)} className="bb-input text-xs">
@@ -64,7 +64,7 @@ export function PORT({ security }: { security?: Security | null }) {
       </div>
 
       {performance && (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-1">
           <div className="border border-bloomberg-border p-2">
             <div className="text-[10px] text-bloomberg-muted">TOTAL VALUE</div>
             <div className="text-lg text-bloomberg-amber font-bold">{formatLargeNumber(performance.totalValue)}</div>
@@ -100,7 +100,7 @@ export function PORT({ security }: { security?: Security | null }) {
           )}
 
           {performance && performance.positions.length > 0 && (
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               <div className="flex-1 border border-bloomberg-border">
                 <table className="bb-table">
                   <thead>
@@ -135,7 +135,7 @@ export function PORT({ security }: { security?: Security | null }) {
           {perfChartData.length > 0 && (
             <div className="border border-bloomberg-border p-2">
               <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-1">PERFORMANCE vs SPY (1Y, Normalized to 100)</div>
-              <LineChart data={perfChartData} dataKey="value" height={200} color="#ff8c00" />
+              <LineChart data={perfChartData} dataKey="value" height={200} color="#fb8b1e" />
             </div>
           )}
 

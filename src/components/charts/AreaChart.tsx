@@ -8,7 +8,7 @@ interface AreaChartProps {
   color?: string;
 }
 
-export function AreaChart({ data, height = 200, dataKey = "value", color = "#ff8c00" }: AreaChartProps) {
+export function AreaChart({ data, height = 200, dataKey = "value", color = "#fb8b1e" }: AreaChartProps) {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <RechartsArea data={data}>
@@ -22,7 +22,7 @@ export function AreaChart({ data, height = 200, dataKey = "value", color = "#ff8
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 11,
           }}
-          labelStyle={{ color: "#ff8c00" }}
+          labelStyle={{ color: "#fb8b1e" }}
         />
         <defs>
           <linearGradient id={`gradient-${dataKey}`} x1="0" y1="0" x2="0" y2="1">

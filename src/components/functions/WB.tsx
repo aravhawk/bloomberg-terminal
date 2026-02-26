@@ -39,7 +39,7 @@ export function WB({ security }: { security?: Security | null }) {
   })();
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">US TREASURY YIELDS</div>
       <div className="border border-bloomberg-border">
         <table className="bb-table">
@@ -71,7 +71,7 @@ export function WB({ security }: { security?: Security | null }) {
 
       <div className="border border-bloomberg-border p-2">
         <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">Key Spreads</div>
-        <div className="grid grid-cols-3 gap-4 text-xs">
+        <div className="grid grid-cols-3 gap-1 text-xs">
           {spread10y2y !== null && (
             <div className="flex justify-between">
               <span className="text-bloomberg-muted">10Y-2Y Spread:</span>

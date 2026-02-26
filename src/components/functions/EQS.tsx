@@ -21,10 +21,10 @@ export function EQS({ security }: { security?: Security | null }) {
   };
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">EQUITY SCREENER</div>
       <div className="border border-bloomberg-border p-2">
-        <div className="grid grid-cols-4 gap-2 text-[10px]">
+        <div className="grid grid-cols-4 gap-1 text-[10px]">
           <div>
             <label className="text-bloomberg-muted block mb-1">Min Market Cap</label>
             <input type="number" value={filters.marketCapMoreThan || ""} onChange={(e) => updateFilter("marketCapMoreThan", e.target.value)} className="bb-input w-full" placeholder="e.g. 1000000000" />

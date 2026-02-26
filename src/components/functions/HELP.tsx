@@ -19,7 +19,7 @@ export function HELP({ security }: { security?: Security | null }) {
   ];
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">BLOOMBERG TERMINAL HELP</div>
 
       <div className="border border-bloomberg-border p-3">

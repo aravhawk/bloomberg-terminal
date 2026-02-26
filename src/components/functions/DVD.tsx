@@ -31,26 +31,26 @@ export function DVD({ security }: { security?: Security | null }) {
   }));
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — DIVIDENDS</div>
 
-      <div className="grid grid-cols-2 gap-2">
-        <div className="border border-bloomberg-border p-3 text-center">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-1">Annual Dividend</div>
+      <div className="grid grid-cols-2 gap-1">
+        <div className="border border-bloomberg-border p-2 text-center">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-0.5">Annual Dividend</div>
           <div className="text-xl font-bold text-bloomberg-green">${formatPrice(annualDiv)}</div>
-          <div className="text-[10px] text-bloomberg-muted mt-1">Sum of last 4 payments</div>
+          <div className="text-[9px] text-bloomberg-muted mt-1">Sum of last 4 payments</div>
         </div>
-        <div className="border border-bloomberg-border p-3 text-center">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-1">5Y Dividend CAGR</div>
+        <div className="border border-bloomberg-border p-2 text-center">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-0.5">5Y Dividend CAGR</div>
           <div className={`text-xl font-bold ${fiveYearCagr !== null && fiveYearCagr >= 0 ? "text-bloomberg-green" : "text-bloomberg-red"}`}>
-            {fiveYearCagr !== null ? `${fiveYearCagr >= 0 ? "+" : ""}${fiveYearCagr.toFixed(2)}%` : "N/A"}
+            {fiveYearCagr !== null ? `${fiveYearCagr >= 0 ? "+" : ""}${fiveYearCagr.toFixed(2)}%` : "--"}
           </div>
-          <div className="text-[10px] text-bloomberg-muted mt-1">{fiveYearCagr !== null ? "Compound annual growth" : "Insufficient data"}</div>
+          <div className="text-[9px] text-bloomberg-muted mt-1">{fiveYearCagr !== null ? "Compound annual growth" : "Insufficient data"}</div>
         </div>
       </div>
 
       <div className="border border-bloomberg-border p-1">
-        <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-1 mb-1">Dividend History</div>
+        <div className="text-[9px] text-bloomberg-amber font-bold uppercase px-1 mb-0.5">Dividend History</div>
         <BarChartComponent data={chartData} height={180} color="#00d26a" />
       </div>
       <div className="border border-bloomberg-border">

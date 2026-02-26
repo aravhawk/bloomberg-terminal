@@ -23,7 +23,7 @@ export function RV({ security }: { security?: Security | null }) {
   };
 
   return (
-    <div className="p-2 space-y-2 overflow-auto h-full">
+    <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — RELATIVE VALUATION</div>
       {metrics.map((metric) => {
         const values = peerData.map((p) => p[metric] as number).filter((v) => v != null && v > 0);
@@ -34,9 +34,9 @@ export function RV({ security }: { security?: Security | null }) {
         const range = max - min || 1;
 
         return (
-          <div key={metric} className="border border-bloomberg-border p-2">
-            <div className="flex justify-between mb-1">
-              <span className="text-[10px] text-bloomberg-amber font-bold uppercase">{metricLabels[metric]}</span>
+          <div key={metric} className="border border-bloomberg-border p-1">
+            <div className="flex justify-between mb-0.5">
+              <span className="text-[9px] text-bloomberg-amber font-bold uppercase">{metricLabels[metric]}</span>
               <span className="text-xs text-bloomberg-muted">Avg: {formatPrice(avg)}</span>
             </div>
             <div className="relative h-4 bg-bloomberg-panel-alt rounded">

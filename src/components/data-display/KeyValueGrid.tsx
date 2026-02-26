@@ -12,13 +12,13 @@ interface KeyValueGridProps {
 
 export function KeyValueGrid({ items, columns = 2 }: KeyValueGridProps) {
   return (
-    <div className={`grid ${columns === 4 ? "grid-cols-4" : "grid-cols-2"} gap-x-4 gap-y-1 p-2`}>
+    <div className={`grid ${columns === 4 ? "grid-cols-4" : "grid-cols-2"} gap-x-3 gap-y-0 p-1`}>
       {items.map((item, i) => (
-        <div key={i} className="flex justify-between gap-2 py-0.5">
-          <span className="text-bloomberg-amber text-[10px] font-bold uppercase whitespace-nowrap">
+        <div key={i} className="flex justify-between gap-1 py-px">
+          <span className="text-bloomberg-amber text-[9px] font-bold uppercase whitespace-nowrap">
             {item.label}
           </span>
-          <span className="text-bloomberg-white text-xs text-right font-mono">
+          <span className="text-bloomberg-white text-[11px] text-right font-mono">
             {item.value}
           </span>
         </div>
