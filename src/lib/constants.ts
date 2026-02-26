@@ -15,7 +15,7 @@ export const FUNCTION_REGISTRY: CommandSuggestion[] = [
   { code: "TOP", name: "Top News", description: "Top market news and headlines", requiresSecurity: false, category: "News" },
   { code: "WEI", name: "World Equity Indices", description: "Global equity index performance", requiresSecurity: false, category: "Market" },
   { code: "MOST", name: "Most Active", description: "Most active stocks by volume and movers", requiresSecurity: false, category: "Market" },
-  { code: "MOV", name: "Movers", description: "Biggest gainers and losers", requiresSecurity: false, category: "Market" },
+  { code: "MOV", name: "Price Movement", description: "Historical price movement analysis", requiresSecurity: true, category: "Equity" },
 
   // Fixed Income
   { code: "WB", name: "World Bond Markets", description: "Global government bond yields", requiresSecurity: false, category: "Fixed Income" },

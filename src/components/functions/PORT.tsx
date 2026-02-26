@@ -5,6 +5,8 @@ import { usePortfolioStore } from "@/store/portfolioStore";
 import { LoadingState } from "@/components/data-display/LoadingState";
 import { formatPrice, formatPercent, formatLargeNumber, getChangeColor } from "@/lib/formatters";
 import { PieChartComponent } from "@/components/charts/PieChartComponent";
+import { LineChart } from "@/components/charts/LineChart";
+import { useCandles } from "@/hooks/useCandles";
 import type { Security } from "@/lib/types";
 
 export function PORT({ security }: { security?: Security | null }) {
@@ -36,6 +38,20 @@ export function PORT({ security }: { security?: Security | null }) {
   };
 
   const pieData = performance?.positions.map((p) => ({ name: p.symbol, value: p.marketValue })) || [];
+
+  // Fetch SPY benchmark data for performance comparison
+  const now = Math.floor(Date.now() / 1000);
+  const oneYearAgo = now - 365 * 86400;
+  const { data: spyCandles } = useCandles("SPY", "D", oneYearAgo, now);
+
+  // Build performance chart data (SPY normalized to 100)
+  const perfChartData = (spyCandles || []).map((c) => {
+    const basePrice = spyCandles && spyCandles.length > 0 ? spyCandles[0].close : 1;
+    return {
+      date: new Date(c.time * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      value: (c.close / basePrice) * 100,
+    };
+  });
 
   return (
     <div className="p-2 space-y-2 overflow-auto h-full">
@@ -113,6 +129,13 @@ export function PORT({ security }: { security?: Security | null }) {
                   <PieChartComponent data={pieData} height={200} />
                 </div>
               )}
+            </div>
+          )}
+
+          {perfChartData.length > 0 && (
+            <div className="border border-bloomberg-border p-2">
+              <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-1">PERFORMANCE vs SPY (1Y, Normalized to 100)</div>
+              <LineChart data={perfChartData} dataKey="value" height={200} color="#ff8c00" />
             </div>
           )}
 

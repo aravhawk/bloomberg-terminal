@@ -68,6 +68,7 @@ html, body {
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   overflow: hidden;
+  user-select: none;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -155,3 +156,9 @@ html, body {
 
 @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 .bb-blink { animation: blink 1s step-end infinite; }
+
+@keyframes loading-dots {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+}
