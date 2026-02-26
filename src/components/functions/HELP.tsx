@@ -22,7 +22,7 @@ export function HELP({ security }: { security?: Security | null }) {
     <div className="p-1 space-y-1 overflow-auto h-full">
       <div className="bb-section-header">BLOOMBERG TERMINAL HELP</div>
 
-      <div className="border border-bloomberg-border p-3">
+      <div className="border border-bloomberg-border p-1">
         <div className="text-bloomberg-amber font-bold text-sm mb-2">Quick Start</div>
         <div className="space-y-1 text-xs text-bloomberg-white">
           <div><span className="text-bloomberg-cyan">1.</span> Type a ticker symbol (e.g., AAPL) in the command bar and press Enter to set the security.</div>
@@ -32,7 +32,7 @@ export function HELP({ security }: { security?: Security | null }) {
         </div>
       </div>
 
-      <div className="border border-bloomberg-border p-3">
+      <div className="border border-bloomberg-border p-1">
         <div className="text-bloomberg-amber font-bold text-sm mb-2">Keyboard Shortcuts</div>
         <div className="grid grid-cols-2 gap-1 text-xs">
           <div><span className="text-bloomberg-cyan">Ctrl+1/2/3/4</span> - Switch panels</div>
@@ -42,7 +42,7 @@ export function HELP({ security }: { security?: Security | null }) {
         </div>
       </div>
 
-      <div className="border border-bloomberg-border p-3">
+      <div className="border border-bloomberg-border p-1">
         <div className="text-bloomberg-amber font-bold text-sm mb-2">Security Groups</div>
         <div className="text-xs text-bloomberg-white space-y-1">
           <div>Panels are assigned to security groups: <span className="text-bloomberg-cyan">A</span>, <span className="text-bloomberg-cyan">B</span>, <span className="text-bloomberg-cyan">C</span>, <span className="text-bloomberg-cyan">D</span></div>
@@ -51,7 +51,7 @@ export function HELP({ security }: { security?: Security | null }) {
         </div>
       </div>
 
-      <div className="border border-bloomberg-border p-3">
+      <div className="border border-bloomberg-border p-1">
         <div className="text-bloomberg-amber font-bold text-sm mb-2">API Status</div>
         <table className="bb-table">
           <thead>

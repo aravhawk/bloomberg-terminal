@@ -7,6 +7,7 @@ const COMMODITIES = [
   { name: "Gold", symbol: "GC", unit: "USD/oz", category: "precious_metals" as const },
   { name: "Silver", symbol: "SI", unit: "USD/oz", category: "precious_metals" as const },
   { name: "Platinum", symbol: "PL", unit: "USD/oz", category: "precious_metals" as const },
+  { name: "Palladium", symbol: "PA", unit: "USD/oz", category: "precious_metals" as const },
   { name: "Copper", symbol: "HG", unit: "USD/lb", category: "industrial_metals" as const },
   { name: "Aluminum", symbol: "ALI", unit: "USD/lb", category: "industrial_metals" as const },
   { name: "Wheat", symbol: "ZW", unit: "USd/bu", category: "agriculture" as const },
@@ -19,7 +20,7 @@ const COMMODITIES = [
 // Fallback prices when API limit is exceeded
 const FALLBACK_PRICES: Record<string, number> = {
   CL: 78.50, BZ: 82.30, NG: 2.45,
-  GC: 2045.00, SI: 24.50, PL: 920.00,
+  GC: 2045.00, SI: 24.50, PL: 920.00, PA: 1050.00,
   HG: 3.85, ALI: 1.05,
   ZW: 580.00, ZC: 450.00, KC: 185.00, SB: 27.50, CT: 82.00,
 };

@@ -41,49 +41,61 @@ export function CryptoDash({ security }: { security?: Security | null }) {
 
       {/* Global Market Overview Banner */}
       {globalData && (
-        <div className="border border-bloomberg-border p-2">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
-            Global Market Overview
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-0.5">Global Market Overview</div>
+          <div className="grid grid-cols-4 gap-1">
             <div>
-              <div className="text-[10px] text-bloomberg-muted">Total Market Cap</div>
-              <div className="text-sm font-bold text-bloomberg-white">
-                {formatLargeNumber(globalData.totalMarketCap)}
-              </div>
-              <div className={`text-[10px] ${getChangeColor(globalData.marketCapChangePercentage24h)}`}>
+              <div className="text-[9px] text-bloomberg-muted">Total Market Cap</div>
+              <div className="text-xs font-bold text-bloomberg-white">{formatLargeNumber(globalData.totalMarketCap)}</div>
+              <div className={`text-[9px] ${getChangeColor(globalData.marketCapChangePercentage24h)}`}>
                 {formatPercent(globalData.marketCapChangePercentage24h)} (24h)
               </div>
             </div>
             <div>
-              <div className="text-[10px] text-bloomberg-muted">24h Volume</div>
-              <div className="text-sm font-bold text-bloomberg-white">
-                {formatLargeNumber(globalData.totalVolume)}
-              </div>
+              <div className="text-[9px] text-bloomberg-muted">24h Volume</div>
+              <div className="text-xs font-bold text-bloomberg-white">{formatLargeNumber(globalData.totalVolume)}</div>
             </div>
             <div>
-              <div className="text-[10px] text-bloomberg-muted">BTC Dominance</div>
-              <div className="text-sm font-bold text-bloomberg-white">
-                {globalData.btcDominance.toFixed(1)}%
-              </div>
+              <div className="text-[9px] text-bloomberg-muted">BTC Dominance</div>
+              <div className="text-xs font-bold text-bloomberg-white">{globalData.btcDominance.toFixed(1)}%</div>
             </div>
             <div>
-              <div className="text-[10px] text-bloomberg-muted">Active Cryptocurrencies</div>
-              <div className="text-sm font-bold text-bloomberg-white">
-                {globalData.activeCryptocurrencies.toLocaleString()}
-              </div>
+              <div className="text-[9px] text-bloomberg-muted">Active Coins</div>
+              <div className="text-xs font-bold text-bloomberg-white">{globalData.activeCryptocurrencies.toLocaleString()}</div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Top Movers */}
+      {coins && coins.length > 0 && (
+        <div className="grid grid-cols-2 gap-1">
+          <div className="border border-bloomberg-border p-1">
+            <div className="text-[9px] text-bloomberg-green font-bold uppercase mb-0.5">TOP GAINERS (24h)</div>
+            {[...coins].sort((a, b) => b.priceChangePercentage24h - a.priceChangePercentage24h).slice(0, 5).map((c) => (
+              <div key={c.id} className="flex justify-between text-[10px] py-px">
+                <span className="text-bloomberg-amber font-bold uppercase">{c.symbol}</span>
+                <span className="text-bloomberg-green">{formatPercent(c.priceChangePercentage24h)}</span>
+              </div>
+            ))}
+          </div>
+          <div className="border border-bloomberg-border p-1">
+            <div className="text-[9px] text-bloomberg-red font-bold uppercase mb-0.5">TOP LOSERS (24h)</div>
+            {[...coins].sort((a, b) => a.priceChangePercentage24h - b.priceChangePercentage24h).slice(0, 5).map((c) => (
+              <div key={c.id} className="flex justify-between text-[10px] py-px">
+                <span className="text-bloomberg-amber font-bold uppercase">{c.symbol}</span>
+                <span className="text-bloomberg-red">{formatPercent(c.priceChangePercentage24h)}</span>
+              </div>
+            ))}
           </div>
         </div>
       )}
 
       {/* Dominance Pie Chart */}
       {dominanceData.length > 0 && (
-        <div className="border border-bloomberg-border p-2">
-          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">
-            Market Dominance
-          </div>
-          <PieChartComponent data={dominanceData} height={200} innerRadius={35} outerRadius={65} />
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[9px] text-bloomberg-amber font-bold uppercase mb-0.5">Market Dominance</div>
+          <PieChartComponent data={dominanceData} height={160} innerRadius={30} outerRadius={55} />
         </div>
       )}
 
