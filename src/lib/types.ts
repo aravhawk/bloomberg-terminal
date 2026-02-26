@@ -307,7 +307,8 @@ export type FunctionCode =
   | "IB"
   | "SET"
   | "HELP"
-  | "WATC";
+  | "WATC"
+  | "BQ" | "CN" | "MGMT" | "GIP" | "IPO" | "CACS" | "SECF";
 
 export interface PanelTab {
   id: string;

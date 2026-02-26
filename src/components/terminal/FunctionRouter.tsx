@@ -34,10 +34,18 @@ const IB = dynamic(() => import("@/components/functions/IB").then((m) => ({ defa
 const Settings = dynamic(() => import("@/components/functions/Settings").then((m) => ({ default: m.Settings })), { loading: Loading });
 const HELP = dynamic(() => import("@/components/functions/HELP").then((m) => ({ default: m.HELP })), { loading: Loading });
 const Watchlist = dynamic(() => import("@/components/functions/Watchlist").then((m) => ({ default: m.Watchlist })), { loading: Loading });
+const BQ = dynamic(() => import("@/components/functions/BQ").then((m) => ({ default: m.BQ })), { loading: Loading });
+const CN = dynamic(() => import("@/components/functions/CN").then((m) => ({ default: m.CN })), { loading: Loading });
+const MGMT = dynamic(() => import("@/components/functions/MGMT").then((m) => ({ default: m.MGMT })), { loading: Loading });
+const GIP = dynamic(() => import("@/components/functions/GIP").then((m) => ({ default: m.GIP })), { loading: Loading });
+const IPOScreen = dynamic(() => import("@/components/functions/IPO").then((m) => ({ default: m.IPO })), { loading: Loading });
+const CACS = dynamic(() => import("@/components/functions/CACS").then((m) => ({ default: m.CACS })), { loading: Loading });
+const SECF = dynamic(() => import("@/components/functions/SECF").then((m) => ({ default: m.SECF })), { loading: Loading });
 
 const FUNCTION_MAP: Record<FunctionCode, React.ComponentType<{ security?: Security | null }>> = {
   DES, GP, FA, ANR, DVD, ERN, COMP, RV,
-  TOP, WEI, MOST, MOV,
+  BQ, CN, MGMT, CACS,
+  TOP, WEI, MOST, MOV, GIP, IPO: IPOScreen, SECF,
   WB, CRVF,
   FXCA, FXMON: FXMonitor,
   CMDTY: CommodityDash,

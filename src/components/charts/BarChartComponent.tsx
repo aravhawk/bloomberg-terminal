@@ -2,7 +2,7 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell } from "recharts";
 
 interface BarChartComponentProps {
-  data: { date: string; value: number; color?: string; [key: string]: unknown }[];
+  data: { date?: string; name?: string; value: number; color?: string; [key: string]: unknown }[];
   height?: number;
   dataKey?: string;
   color?: string;
@@ -20,7 +20,7 @@ export function BarChartComponent({
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" />
-        <XAxis dataKey="date" stroke="#888" fontSize={10} tickLine={false} />
+        <XAxis dataKey={data[0]?.date !== undefined ? "date" : "name"} stroke="#888" fontSize={10} tickLine={false} />
         <YAxis stroke="#888" fontSize={10} tickLine={false} width={60} />
         <Tooltip
           contentStyle={{

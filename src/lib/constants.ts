@@ -11,11 +11,19 @@ export const FUNCTION_REGISTRY: CommandSuggestion[] = [
   { code: "COMP", name: "Comparable Companies", description: "Peer comparison and relative valuation", requiresSecurity: true, category: "Equity" },
   { code: "RV", name: "Relative Value", description: "Relative valuation metrics vs peers", requiresSecurity: true, category: "Equity" },
 
+  { code: "BQ", name: "Bloomberg Quote", description: "Detailed quote with bid/ask, volume, and ranges", requiresSecurity: true, category: "Equity" },
+  { code: "CN", name: "Company News", description: "Security-specific news and headlines", requiresSecurity: true, category: "Equity" },
+  { code: "MGMT", name: "Management", description: "Key executives and board members", requiresSecurity: true, category: "Equity" },
+  { code: "CACS", name: "Corporate Actions", description: "Dividends, splits, and corporate events", requiresSecurity: true, category: "Equity" },
+
   // News & Market
   { code: "TOP", name: "Top News", description: "Top market news and headlines", requiresSecurity: false, category: "News" },
   { code: "WEI", name: "World Equity Indices", description: "Global equity index performance", requiresSecurity: false, category: "Market" },
   { code: "MOST", name: "Most Active", description: "Most active stocks by volume and movers", requiresSecurity: false, category: "Market" },
   { code: "MOV", name: "Price Movement", description: "Historical price movement analysis", requiresSecurity: true, category: "Equity" },
+  { code: "GIP", name: "Sector Performance", description: "S&P 500 sector performance comparison", requiresSecurity: false, category: "Market" },
+  { code: "IPO", name: "IPO Calendar", description: "Recent and upcoming IPO listings", requiresSecurity: false, category: "Market" },
+  { code: "SECF", name: "Security Finder", description: "Advanced security search and discovery", requiresSecurity: false, category: "Tools" },
 
   // Fixed Income
   { code: "WB", name: "World Bond Markets", description: "Global government bond yields", requiresSecurity: false, category: "Fixed Income" },
@@ -248,6 +256,20 @@ export const TIMEFRAME_CONFIG: { label: string; value: string; resolution: strin
   { label: "3Y", value: "3Y", resolution: "W", days: 1095 },
   { label: "5Y", value: "5Y", resolution: "W", days: 1825 },
   { label: "MAX", value: "MAX", resolution: "M", days: 0 },
+];
+
+export const SECTOR_ETFS: { etf: string; sector: string; color: string }[] = [
+  { etf: "XLK", sector: "Technology", color: "#0068ff" },
+  { etf: "XLV", sector: "Healthcare", color: "#00d26a" },
+  { etf: "XLF", sector: "Financials", color: "#fb8b1e" },
+  { etf: "XLY", sector: "Consumer Discretionary", color: "#ff433d" },
+  { etf: "XLP", sector: "Consumer Staples", color: "#4af6c3" },
+  { etf: "XLI", sector: "Industrials", color: "#ffd700" },
+  { etf: "XLE", sector: "Energy", color: "#c97016" },
+  { etf: "XLU", sector: "Utilities", color: "#888888" },
+  { etf: "XLRE", sector: "Real Estate", color: "#9b59b6" },
+  { etf: "XLB", sector: "Materials", color: "#e67e22" },
+  { etf: "XLC", sector: "Communication", color: "#3498db" },
 ];
 
 export const DEFAULT_WATCHLIST_SYMBOLS: string[] = [
