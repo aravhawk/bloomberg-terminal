@@ -1,0 +1,51 @@
+"use client";
+import { useCommodities } from "@/hooks/useCommodities";
+import { LoadingState } from "@/components/data-display/LoadingState";
+import { formatPrice, formatPercent, getChangeColor } from "@/lib/formatters";
+import type { Security, CommodityPrice } from "@/lib/types";
+
+const CATEGORIES: { key: CommodityPrice["category"]; label: string }[] = [
+  { key: "energy", label: "ENERGY" },
+  { key: "precious_metals", label: "PRECIOUS METALS" },
+  { key: "industrial_metals", label: "INDUSTRIAL METALS" },
+  { key: "agriculture", label: "AGRICULTURE" },
+];
+
+export function CommodityDash({ security }: { security?: Security | null }) {
+  void security;
+  const { data: commodities, isLoading } = useCommodities();
+
+  if (isLoading) return <LoadingState />;
+
+  return (
+    <div className="p-2 space-y-2 overflow-auto h-full">
+      <div className="bb-section-header">COMMODITY PRICES</div>
+      {CATEGORIES.map((cat) => {
+        const items = (commodities || []).filter((c) => c.category === cat.key);
+        if (items.length === 0) return null;
+        return (
+          <div key={cat.key} className="border border-bloomberg-border">
+            <div className="bb-section-header">{cat.label}</div>
+            <table className="bb-table">
+              <thead>
+                <tr><th>Commodity</th><th>Symbol</th><th className="text-right">Price</th><th className="text-right">Change</th><th className="text-right">Chg%</th><th className="text-right">Unit</th></tr>
+              </thead>
+              <tbody>
+                {items.map((item) => (
+                  <tr key={item.symbol}>
+                    <td className="text-bloomberg-white">{item.name}</td>
+                    <td className="text-bloomberg-amber font-bold">{item.symbol}</td>
+                    <td className="text-right num">${formatPrice(item.price)}</td>
+                    <td className={`text-right num ${getChangeColor(item.change)}`}>{item.change > 0 ? "+" : ""}{formatPrice(item.change)}</td>
+                    <td className={`text-right num ${getChangeColor(item.changePercent)}`}>{formatPercent(item.changePercent)}</td>
+                    <td className="text-right text-bloomberg-muted">{item.unit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
