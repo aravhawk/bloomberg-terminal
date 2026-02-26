@@ -49,6 +49,41 @@ export function EQS({ security }: { security?: Security | null }) {
             </select>
           </div>
           <div>
+            <label className="text-bloomberg-muted block mb-1">Max Price</label>
+            <input type="number" value={filters.priceLowerThan || ""} onChange={(e) => updateFilter("priceLowerThan", e.target.value)} className="bb-input w-full" />
+          </div>
+          <div>
+            <label className="text-bloomberg-muted block mb-1">Beta Min</label>
+            <input type="number" value={filters.betaMoreThan || ""} onChange={(e) => updateFilter("betaMoreThan", e.target.value)} className="bb-input w-full" step="0.1" />
+          </div>
+          <div>
+            <label className="text-bloomberg-muted block mb-1">Beta Max</label>
+            <input type="number" value={filters.betaLowerThan || ""} onChange={(e) => updateFilter("betaLowerThan", e.target.value)} className="bb-input w-full" step="0.1" />
+          </div>
+          <div>
+            <label className="text-bloomberg-muted block mb-1">Exchange</label>
+            <select value={filters.exchange || ""} onChange={(e) => updateFilter("exchange", e.target.value)} className="bb-input w-full">
+              <option value="">All</option>
+              <option value="NYSE">NYSE</option>
+              <option value="NASDAQ">NASDAQ</option>
+              <option value="AMEX">AMEX</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-bloomberg-muted block mb-1">Country</label>
+            <select value={filters.country || ""} onChange={(e) => updateFilter("country", e.target.value)} className="bb-input w-full">
+              <option value="">All</option>
+              <option value="US">US</option>
+              <option value="CA">CA</option>
+              <option value="GB">GB</option>
+              <option value="DE">DE</option>
+              <option value="FR">FR</option>
+              <option value="JP">JP</option>
+              <option value="CN">CN</option>
+              <option value="HK">HK</option>
+            </select>
+          </div>
+          <div>
             <label className="text-bloomberg-muted block mb-1">Min Dividend</label>
             <input type="number" value={filters.dividendMoreThan || ""} onChange={(e) => updateFilter("dividendMoreThan", e.target.value)} className="bb-input w-full" />
           </div>

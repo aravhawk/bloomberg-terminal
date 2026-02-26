@@ -32,6 +32,12 @@ export function WB({ security }: { security?: Security | null }) {
     return y10 && y3m ? y10.yield - y3m.yield : null;
   })();
 
+  const spread30y5y = (() => {
+    const y30 = yields.find((y) => y.maturity === "30Y");
+    const y5 = yields.find((y) => y.maturity === "5Y");
+    return y30 && y5 ? y30.yield - y5.yield : null;
+  })();
+
   return (
     <div className="p-2 space-y-2 overflow-auto h-full">
       <div className="bb-section-header">US TREASURY YIELDS</div>
@@ -65,7 +71,7 @@ export function WB({ security }: { security?: Security | null }) {
 
       <div className="border border-bloomberg-border p-2">
         <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-2">Key Spreads</div>
-        <div className="grid grid-cols-2 gap-4 text-xs">
+        <div className="grid grid-cols-3 gap-4 text-xs">
           {spread10y2y !== null && (
             <div className="flex justify-between">
               <span className="text-bloomberg-muted">10Y-2Y Spread:</span>
@@ -76,6 +82,12 @@ export function WB({ security }: { security?: Security | null }) {
             <div className="flex justify-between">
               <span className="text-bloomberg-muted">10Y-3M Spread:</span>
               <span className={getChangeColor(spread10y3m)}>{formatPercent(spread10y3m, 3)}</span>
+            </div>
+          )}
+          {spread30y5y !== null && (
+            <div className="flex justify-between">
+              <span className="text-bloomberg-muted">30Y-5Y Spread:</span>
+              <span className={getChangeColor(spread30y5y)}>{formatPercent(spread30y5y, 3)}</span>
             </div>
           )}
         </div>

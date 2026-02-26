@@ -12,14 +12,21 @@ export function RV({ security }: { security?: Security | null }) {
   if (isLoading) return <LoadingState />;
 
   const peerData: Record<string, unknown>[] = data?.peerData || [];
-  const metrics = ["peRatio", "pbRatio", "beta", "dividendYield", "roe"];
-  const metricLabels: Record<string, string> = { peRatio: "P/E Ratio", pbRatio: "P/B Ratio", beta: "Beta", dividendYield: "Div Yield %", roe: "ROE %" };
+  const metrics = ["peRatio", "pbRatio", "priceToSalesRatio", "evToEbitda", "evToRevenue", "pegRatio"];
+  const metricLabels: Record<string, string> = {
+    peRatio: "P/E Ratio",
+    pbRatio: "P/B Ratio",
+    priceToSalesRatio: "P/S Ratio",
+    evToEbitda: "EV/EBITDA",
+    evToRevenue: "EV/Revenue",
+    pegRatio: "PEG Ratio",
+  };
 
   return (
     <div className="p-2 space-y-2 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — RELATIVE VALUATION</div>
       {metrics.map((metric) => {
-        const values = peerData.map((p) => p[metric] as number).filter((v) => v > 0);
+        const values = peerData.map((p) => p[metric] as number).filter((v) => v != null && v > 0);
         if (values.length === 0) return null;
         const min = Math.min(...values);
         const max = Math.max(...values);

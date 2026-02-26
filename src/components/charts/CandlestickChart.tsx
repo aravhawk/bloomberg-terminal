@@ -1,19 +1,35 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { createChart, type IChartApi, type ISeriesApi, CrosshairMode, ColorType, CandlestickSeries, HistogramSeries, type Time } from "lightweight-charts";
+import { createChart, type IChartApi, type ISeriesApi, CrosshairMode, ColorType, CandlestickSeries, HistogramSeries, LineSeries, type Time } from "lightweight-charts";
 import type { CandleData } from "@/lib/types";
+import { calculateSMA, calculateEMA, calculateBollingerBands } from "@/lib/indicators";
+
+export interface IndicatorConfig {
+  type: "SMA" | "EMA" | "RSI" | "MACD" | "BB";
+  period: number;
+  color?: string;
+}
 
 interface CandlestickChartProps {
   data: CandleData[];
   height?: number;
+  indicators?: IndicatorConfig[];
   onCrosshairMove?: (data: { time: number; open: number; high: number; low: number; close: number; volume: number } | null) => void;
 }
 
-export function CandlestickChart({ data, height = 400, onCrosshairMove }: CandlestickChartProps) {
+const DEFAULT_COLORS: Record<string, string> = {
+  SMA: "#2196F3",
+  EMA: "#FF9800",
+  BB_MIDDLE: "#673AB7",
+  BB_BAND: "rgba(103,58,183,0.5)",
+};
+
+export function CandlestickChart({ data, height = 400, indicators = [], onCrosshairMove }: CandlestickChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null);
+  const indicatorSeriesRef = useRef<ISeriesApi<"Line">[]>([]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -91,6 +107,7 @@ export function CandlestickChart({ data, height = 400, onCrosshairMove }: Candle
     };
   }, [height, onCrosshairMove]);
 
+  // Update candle + volume data
   useEffect(() => {
     if (!candleSeriesRef.current || !volumeSeriesRef.current || !data.length) return;
 
@@ -112,6 +129,93 @@ export function CandlestickChart({ data, height = 400, onCrosshairMove }: Candle
     volumeSeriesRef.current.setData(volumeData);
     chartRef.current?.timeScale().fitContent();
   }, [data]);
+
+  // Update indicator overlays
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart || !data.length) return;
+
+    // Remove old indicator series
+    for (const series of indicatorSeriesRef.current) {
+      try {
+        chart.removeSeries(series);
+      } catch {
+        // series may already be removed
+      }
+    }
+    indicatorSeriesRef.current = [];
+
+    // Only process overlay indicators (SMA, EMA, BB)
+    const overlayIndicators = indicators.filter((ind) => ind.type === "SMA" || ind.type === "EMA" || ind.type === "BB");
+
+    for (const indicator of overlayIndicators) {
+      if (indicator.type === "SMA") {
+        const values = calculateSMA(data, indicator.period);
+        const lineData = data
+          .map((d, i) => (values[i] !== null ? { time: d.time as Time, value: values[i]! } : null))
+          .filter((d): d is { time: Time; value: number } => d !== null);
+
+        const series = chart.addSeries(LineSeries, {
+          color: indicator.color || DEFAULT_COLORS.SMA,
+          lineWidth: 1,
+          priceScaleId: "right",
+        });
+        series.setData(lineData);
+        indicatorSeriesRef.current.push(series);
+      } else if (indicator.type === "EMA") {
+        const values = calculateEMA(data, indicator.period);
+        const lineData = data
+          .map((d, i) => (values[i] !== null ? { time: d.time as Time, value: values[i]! } : null))
+          .filter((d): d is { time: Time; value: number } => d !== null);
+
+        const series = chart.addSeries(LineSeries, {
+          color: indicator.color || DEFAULT_COLORS.EMA,
+          lineWidth: 1,
+          priceScaleId: "right",
+        });
+        series.setData(lineData);
+        indicatorSeriesRef.current.push(series);
+      } else if (indicator.type === "BB") {
+        const bb = calculateBollingerBands(data, indicator.period);
+
+        // Upper band
+        const upperData = data
+          .map((d, i) => (bb.upper[i] !== null ? { time: d.time as Time, value: bb.upper[i]! } : null))
+          .filter((d): d is { time: Time; value: number } => d !== null);
+        const upperSeries = chart.addSeries(LineSeries, {
+          color: indicator.color || DEFAULT_COLORS.BB_BAND,
+          lineWidth: 1,
+          priceScaleId: "right",
+        });
+        upperSeries.setData(upperData);
+        indicatorSeriesRef.current.push(upperSeries);
+
+        // Middle band
+        const middleData = data
+          .map((d, i) => (bb.middle[i] !== null ? { time: d.time as Time, value: bb.middle[i]! } : null))
+          .filter((d): d is { time: Time; value: number } => d !== null);
+        const middleSeries = chart.addSeries(LineSeries, {
+          color: DEFAULT_COLORS.BB_MIDDLE,
+          lineWidth: 1,
+          priceScaleId: "right",
+        });
+        middleSeries.setData(middleData);
+        indicatorSeriesRef.current.push(middleSeries);
+
+        // Lower band
+        const lowerData = data
+          .map((d, i) => (bb.lower[i] !== null ? { time: d.time as Time, value: bb.lower[i]! } : null))
+          .filter((d): d is { time: Time; value: number } => d !== null);
+        const lowerSeries = chart.addSeries(LineSeries, {
+          color: indicator.color || DEFAULT_COLORS.BB_BAND,
+          lineWidth: 1,
+          priceScaleId: "right",
+        });
+        lowerSeries.setData(lowerData);
+        indicatorSeriesRef.current.push(lowerSeries);
+      }
+    }
+  }, [data, indicators]);
 
   return <div ref={containerRef} className="w-full" />;
 }

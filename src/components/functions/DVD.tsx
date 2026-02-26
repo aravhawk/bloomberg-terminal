@@ -13,6 +13,18 @@ export function DVD({ security }: { security?: Security | null }) {
   if (isLoading) return <LoadingState />;
   if (!dividends || dividends.length === 0) return <div className="flex items-center justify-center h-full text-bloomberg-muted text-sm">NO DIVIDEND DATA AVAILABLE</div>;
 
+  // Calculate annual dividend (sum of last 4 dividends as proxy)
+  const annualDiv = dividends.slice(0, 4).reduce((sum, d) => sum + d.amount, 0);
+
+  // 5-year CAGR (if we have 5+ years of data)
+  const fiveYearCagr = (() => {
+    if (dividends.length < 8) return null;
+    const recent = dividends.slice(0, 4).reduce((s, d) => s + d.amount, 0);
+    const fiveYearsAgo = dividends.slice(-4).reduce((s, d) => s + d.amount, 0);
+    if (fiveYearsAgo <= 0) return null;
+    return (Math.pow(recent / fiveYearsAgo, 1 / 5) - 1) * 100;
+  })();
+
   const chartData = [...dividends].reverse().slice(-20).map((d) => ({
     date: formatDate(d.exDate),
     value: d.amount,
@@ -21,6 +33,22 @@ export function DVD({ security }: { security?: Security | null }) {
   return (
     <div className="p-2 space-y-2 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — DIVIDENDS</div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div className="border border-bloomberg-border p-3 text-center">
+          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-1">Annual Dividend</div>
+          <div className="text-xl font-bold text-bloomberg-green">${formatPrice(annualDiv)}</div>
+          <div className="text-[10px] text-bloomberg-muted mt-1">Sum of last 4 payments</div>
+        </div>
+        <div className="border border-bloomberg-border p-3 text-center">
+          <div className="text-[10px] text-bloomberg-amber font-bold uppercase mb-1">5Y Dividend CAGR</div>
+          <div className={`text-xl font-bold ${fiveYearCagr !== null && fiveYearCagr >= 0 ? "text-bloomberg-green" : "text-bloomberg-red"}`}>
+            {fiveYearCagr !== null ? `${fiveYearCagr >= 0 ? "+" : ""}${fiveYearCagr.toFixed(2)}%` : "N/A"}
+          </div>
+          <div className="text-[10px] text-bloomberg-muted mt-1">{fiveYearCagr !== null ? "Compound annual growth" : "Insufficient data"}</div>
+        </div>
+      </div>
+
       <div className="border border-bloomberg-border p-1">
         <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-1 mb-1">Dividend History</div>
         <BarChartComponent data={chartData} height={180} color="#00d26a" />

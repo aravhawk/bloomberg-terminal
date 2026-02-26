@@ -20,6 +20,33 @@ export function IB({ security }: { security?: Security | null }) {
     if (!input.trim()) return;
     addMessage(input.trim(), "USER", "user");
 
+    // Handle /price command
+    if (input.trim().startsWith("/price ")) {
+      const sym = input.trim().split(" ")[1]?.toUpperCase();
+      if (sym) {
+        fetch(`/api/stocks/quote/${sym}`)
+          .then(res => res.json())
+          .then((data: { price?: number; change?: number; changePercent?: number; high?: number; low?: number }) => {
+            if (data.price) {
+              const chg = data.change ?? 0;
+              const chgPct = data.changePercent ?? 0;
+              const hi = data.high ?? 0;
+              const lo = data.low ?? 0;
+              addMessage(
+                `${sym}: $${data.price.toFixed(2)} | Chg: ${chg >= 0 ? "+" : ""}${chg.toFixed(2)} (${chgPct >= 0 ? "+" : ""}${chgPct.toFixed(2)}%) | H: $${hi.toFixed(2)} L: $${lo.toFixed(2)}`,
+                "SYSTEM",
+                "system"
+              );
+            } else {
+              addMessage(`Symbol not found: ${sym}`, "SYSTEM", "system");
+            }
+          })
+          .catch(() => addMessage(`Failed to fetch price for ${sym}`, "SYSTEM", "system"));
+        setInput("");
+        return; // Don't trigger normal auto-response
+      }
+    }
+
     // Simulated auto-response
     setTimeout(() => {
       const responses = [

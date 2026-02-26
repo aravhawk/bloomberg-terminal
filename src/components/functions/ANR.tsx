@@ -43,6 +43,21 @@ export function ANR({ security }: { security?: Security | null }) {
               <div className="flex justify-between"><span className="text-bloomberg-muted">Low:</span><span className="text-bloomberg-red">${formatPrice(pt.targetLow)}</span></div>
               <div className="flex justify-between"><span className="text-bloomberg-muted">Median:</span><span>${formatPrice(pt.targetMedian)}</span></div>
             </div>
+            {quote && (
+              <div className="mt-2">
+                <div className="text-[10px] text-bloomberg-muted mb-1">PRICE TARGET RANGE</div>
+                <div className="flex items-center gap-2 text-[10px]">
+                  <span className="text-bloomberg-red">${formatPrice(pt.targetLow)}</span>
+                  <div className="flex-1 h-3 bg-bloomberg-panel-alt rounded relative">
+                    {/* Mean target marker */}
+                    <div className="absolute h-full w-0.5 bg-bloomberg-amber" style={{ left: `${Math.min(100, Math.max(0, ((pt.targetMean - pt.targetLow) / (pt.targetHigh - pt.targetLow)) * 100))}%` }} />
+                    {/* Current price marker */}
+                    <div className="absolute -top-0.5 w-2 h-4 bg-bloomberg-white rounded-sm" style={{ left: `${Math.min(100, Math.max(0, ((quote.price - pt.targetLow) / (pt.targetHigh - pt.targetLow)) * 100))}%` }} />
+                  </div>
+                  <span className="text-bloomberg-green">${formatPrice(pt.targetHigh)}</span>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@
 import { useEarnings } from "@/hooks/useEarnings";
 import { LoadingState } from "@/components/data-display/LoadingState";
 import { BarChartComponent } from "@/components/charts/BarChartComponent";
+import { LineChart } from "@/components/charts/LineChart";
 import { formatPrice, formatDate, formatLargeNumber } from "@/lib/formatters";
 import type { Security } from "@/lib/types";
 
@@ -19,6 +20,11 @@ export function ERN({ security }: { security?: Security | null }) {
     color: (e.epsSurprise ?? 0) >= 0 ? "#00d26a" : "#ff3b3b",
   }));
 
+  const epsTrendData = [...earnings].reverse().filter(e => e.epsActual != null).map(e => ({
+    date: e.date ? formatDate(e.date) : `Q${e.quarter} ${e.year}`,
+    value: e.epsActual as number,
+  }));
+
   return (
     <div className="p-2 space-y-2 overflow-auto h-full">
       <div className="bb-section-header">{symbol} — EARNINGS</div>
@@ -26,6 +32,12 @@ export function ERN({ security }: { security?: Security | null }) {
         <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-1 mb-1">EPS Surprise</div>
         <BarChartComponent data={chartData} height={180} showColors />
       </div>
+      {epsTrendData.length > 0 && (
+        <div className="border border-bloomberg-border p-1">
+          <div className="text-[10px] text-bloomberg-amber font-bold uppercase px-1 mb-1">EPS Trend</div>
+          <LineChart data={epsTrendData} dataKey="value" height={150} color="#ff8c00" />
+        </div>
+      )}
       <div className="border border-bloomberg-border">
         <table className="bb-table">
           <thead>

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useWatchlistStore } from "@/store/watchlistStore";
 import { useQueries } from "@tanstack/react-query";
-import { formatPrice, formatPercent, formatVolume, getChangeColor } from "@/lib/formatters";
+import { formatPrice, formatPercent, getChangeColor } from "@/lib/formatters";
 import { SparklineChart } from "@/components/data-display/SparklineChart";
 import type { Security, StockQuote } from "@/lib/types";
 
@@ -72,7 +72,7 @@ export function Watchlist({ security }: { security?: Security | null }) {
                   </td>
                   <td className="text-right num">{quote ? `$${formatPrice(quote.high)}` : "--"}</td>
                   <td className="text-right num">{quote ? `$${formatPrice(quote.low)}` : "--"}</td>
-                  <td className="text-right num">{quote ? formatVolume(0) : "--"}</td>
+                  <td className="text-right num">--</td>
                   <td>
                     <button onClick={() => removeSymbol(activeWatchlistId, symbol)} className="text-bloomberg-red text-[10px] hover:underline">DEL</button>
                   </td>

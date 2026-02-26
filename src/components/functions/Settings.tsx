@@ -1,9 +1,12 @@
 "use client";
+import { useState } from "react";
 import { useSettingsStore } from "@/store/settingsStore";
 import type { Security } from "@/lib/types";
 
 export function Settings({ security }: { security?: Security | null }) {
   void security;
+  const [showKeys, setShowKeys] = useState<Record<string, boolean>>({});
+  const toggleKey = (key: string) => setShowKeys(prev => ({ ...prev, [key]: !prev[key] }));
   const {
     finnhubKey, fmpKey, alphaVantageKey, fredKey,
     setApiKey,
@@ -23,19 +26,31 @@ export function Settings({ security }: { security?: Security | null }) {
         <div className="space-y-2">
           <div>
             <label className="text-[10px] text-bloomberg-muted block mb-1">Finnhub API Key</label>
-            <input type="password" value={finnhubKey} onChange={(e) => setApiKey("finnhubKey", e.target.value)} className="bb-input w-80" placeholder="Enter Finnhub API key..." />
+            <div className="flex gap-1">
+              <input type={showKeys.finnhub ? "text" : "password"} value={finnhubKey} onChange={(e) => setApiKey("finnhubKey", e.target.value)} className="bb-input w-80" placeholder="Enter Finnhub API key..." />
+              <button onClick={() => toggleKey("finnhub")} className="bb-btn text-[10px]">{showKeys.finnhub ? "HIDE" : "SHOW"}</button>
+            </div>
           </div>
           <div>
             <label className="text-[10px] text-bloomberg-muted block mb-1">FMP API Key</label>
-            <input type="password" value={fmpKey} onChange={(e) => setApiKey("fmpKey", e.target.value)} className="bb-input w-80" placeholder="Enter FMP API key..." />
+            <div className="flex gap-1">
+              <input type={showKeys.fmp ? "text" : "password"} value={fmpKey} onChange={(e) => setApiKey("fmpKey", e.target.value)} className="bb-input w-80" placeholder="Enter FMP API key..." />
+              <button onClick={() => toggleKey("fmp")} className="bb-btn text-[10px]">{showKeys.fmp ? "HIDE" : "SHOW"}</button>
+            </div>
           </div>
           <div>
             <label className="text-[10px] text-bloomberg-muted block mb-1">Alpha Vantage API Key</label>
-            <input type="password" value={alphaVantageKey} onChange={(e) => setApiKey("alphaVantageKey", e.target.value)} className="bb-input w-80" placeholder="Enter Alpha Vantage API key..." />
+            <div className="flex gap-1">
+              <input type={showKeys.alphaVantage ? "text" : "password"} value={alphaVantageKey} onChange={(e) => setApiKey("alphaVantageKey", e.target.value)} className="bb-input w-80" placeholder="Enter Alpha Vantage API key..." />
+              <button onClick={() => toggleKey("alphaVantage")} className="bb-btn text-[10px]">{showKeys.alphaVantage ? "HIDE" : "SHOW"}</button>
+            </div>
           </div>
           <div>
             <label className="text-[10px] text-bloomberg-muted block mb-1">FRED API Key</label>
-            <input type="password" value={fredKey} onChange={(e) => setApiKey("fredKey", e.target.value)} className="bb-input w-80" placeholder="Enter FRED API key..." />
+            <div className="flex gap-1">
+              <input type={showKeys.fred ? "text" : "password"} value={fredKey} onChange={(e) => setApiKey("fredKey", e.target.value)} className="bb-input w-80" placeholder="Enter FRED API key..." />
+              <button onClick={() => toggleKey("fred")} className="bb-btn text-[10px]">{showKeys.fred ? "HIDE" : "SHOW"}</button>
+            </div>
           </div>
         </div>
       </div>
@@ -65,6 +80,18 @@ export function Settings({ security }: { security?: Security | null }) {
               {soundEnabled ? "ON" : "OFF"}
             </button>
           </div>
+        </div>
+      </div>
+
+      <div className="border border-bloomberg-border p-3 space-y-3">
+        <div className="text-bloomberg-amber font-bold text-sm">Keyboard Shortcuts</div>
+        <div className="grid grid-cols-2 gap-1 text-xs">
+          <div><span className="text-bloomberg-cyan">/ or Escape</span> -- Focus/blur command bar</div>
+          <div><span className="text-bloomberg-cyan">Ctrl+1/2/3/4</span> -- Focus panel 1-4</div>
+          <div><span className="text-bloomberg-cyan">Ctrl+L</span> -- Cycle layout modes</div>
+          <div><span className="text-bloomberg-cyan">Ctrl+W</span> -- Close active tab</div>
+          <div><span className="text-bloomberg-cyan">Ctrl+T</span> -- New tab in active panel</div>
+          <div><span className="text-bloomberg-cyan">F11 / Ctrl+Shift+F</span> -- Toggle fullscreen</div>
         </div>
       </div>
 

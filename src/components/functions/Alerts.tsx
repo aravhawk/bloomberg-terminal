@@ -9,6 +9,7 @@ const CONDITIONS: { value: AlertCondition; label: string }[] = [
   { value: "below", label: "Price Below" },
   { value: "pct_change_above", label: "% Change Above" },
   { value: "pct_change_below", label: "% Change Below" },
+  { value: "volume_above", label: "Volume Above" },
 ];
 
 export function Alerts({ security }: { security?: Security | null }) {
