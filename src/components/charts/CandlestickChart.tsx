@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { createChart, type IChartApi, type ISeriesApi, CrosshairMode, ColorType } from "lightweight-charts";
+import { createChart, type IChartApi, type ISeriesApi, CrosshairMode, ColorType, CandlestickSeries, HistogramSeries, type Time } from "lightweight-charts";
 import type { CandleData } from "@/lib/types";
 
 interface CandlestickChartProps {
@@ -40,7 +40,7 @@ export function CandlestickChart({ data, height = 400, onCrosshairMove }: Candle
       },
     });
 
-    const candleSeries = chart.addCandlestickSeries({
+    const candleSeries = chart.addSeries(CandlestickSeries, {
       upColor: "#00d26a",
       downColor: "#ff3b3b",
       borderUpColor: "#00d26a",
@@ -49,7 +49,7 @@ export function CandlestickChart({ data, height = 400, onCrosshairMove }: Candle
       wickDownColor: "#ff3b3b",
     });
 
-    const volumeSeries = chart.addHistogramSeries({
+    const volumeSeries = chart.addSeries(HistogramSeries, {
       priceFormat: { type: "volume" },
       priceScaleId: "volume",
     });
@@ -95,7 +95,7 @@ export function CandlestickChart({ data, height = 400, onCrosshairMove }: Candle
     if (!candleSeriesRef.current || !volumeSeriesRef.current || !data.length) return;
 
     const candleData = data.map((d) => ({
-      time: d.time as number,
+      time: d.time as Time,
       open: d.open,
       high: d.high,
       low: d.low,
@@ -103,7 +103,7 @@ export function CandlestickChart({ data, height = 400, onCrosshairMove }: Candle
     }));
 
     const volumeData = data.map((d) => ({
-      time: d.time as number,
+      time: d.time as Time,
       value: d.volume,
       color: d.close >= d.open ? "rgba(0,210,106,0.3)" : "rgba(255,59,59,0.3)",
     }));

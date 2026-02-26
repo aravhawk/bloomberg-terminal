@@ -37,10 +37,11 @@ export function DES({ security }: { security?: Security | null }) {
     { label: "Country", value: profile?.country || "" },
     { label: "IPO Date", value: profile?.ipo || "" },
     { label: "Website", value: profile?.website ? <a href={profile.website} target="_blank" rel="noopener noreferrer" className="text-bloomberg-blue hover:underline">{profile.website.replace(/https?:\/\/(www\.)?/, "")}</a> : "" },
-    { label: "CEO", value: (profile as Record<string, unknown>)?.ceo || "" },
+    { label: "CEO", value: profile?.ceo || "" },
   ];
 
-  const p = profile as Record<string, unknown> | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const p = profile as any;
   const keyFinancials = [
     { label: "P/E", value: p?.peRatio ? formatPrice(p.peRatio as number) : "N/A" },
     { label: "P/B", value: p?.pbRatio ? formatPrice(p.pbRatio as number) : "N/A" },

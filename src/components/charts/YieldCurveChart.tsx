@@ -27,7 +27,7 @@ export function YieldCurveChart({ data, height = 250 }: YieldCurveChartProps) {
             fontSize: 11,
           }}
           labelStyle={{ color: "#ff8c00" }}
-          formatter={(value: number) => [`${value.toFixed(3)}%`, "Yield"]}
+          formatter={(value?: number) => [`${(value ?? 0).toFixed(3)}%`, "Yield"]}
         />
         <Line
           type="monotone"

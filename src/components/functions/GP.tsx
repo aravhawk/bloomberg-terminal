@@ -7,22 +7,20 @@ import { TIMEFRAME_CONFIG } from "@/lib/constants";
 import { formatPrice, formatVolume } from "@/lib/formatters";
 import type { Security } from "@/lib/types";
 
-const TIMEFRAMES = Object.keys(TIMEFRAME_CONFIG);
-
 export function GP({ security }: { security?: Security | null }) {
   const [timeframe, setTimeframe] = useState("3M");
   const [crosshairData, setCrosshairData] = useState<{ open: number; high: number; low: number; close: number; volume: number } | null>(null);
 
   const symbol = security?.symbol;
-  const config = TIMEFRAME_CONFIG[timeframe];
+  const config = TIMEFRAME_CONFIG.find((t) => t.value === timeframe) || TIMEFRAME_CONFIG[3];
 
   const now = Math.floor(Date.now() / 1000);
   const from = useMemo(() => {
     if (timeframe === "YTD") {
       return Math.floor(new Date(new Date().getFullYear(), 0, 1).getTime() / 1000);
     }
-    return now - config.daysBack * 86400;
-  }, [timeframe, now, config.daysBack]);
+    return now - config.days * 86400;
+  }, [timeframe, now, config.days]);
 
   const { data: candles, isLoading } = useCandles(symbol, config.resolution, from, now);
 
@@ -33,7 +31,7 @@ export function GP({ security }: { security?: Security | null }) {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <div className="flex items-center gap-1 p-1 border-b border-bloomberg-border shrink-0 flex-wrap">
-        {TIMEFRAMES.map((tf) => (
+        {TIMEFRAME_CONFIG.map(({ value: tf }) => (
           <button
             key={tf}
             onClick={() => setTimeframe(tf)}

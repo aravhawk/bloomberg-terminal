@@ -13,7 +13,7 @@ export function ECST({ security }: { security?: Security | null }) {
 
   const indicator = ECONOMIC_INDICATORS.find((i) => i.seriesId === selectedSeries);
   const observations: { date: string; value: number }[] = data?.observations || [];
-  const chartData = observations.map((obs) => ({ name: obs.date, value: obs.value }));
+  const chartData = observations.map((obs) => ({ date: obs.date, value: obs.value }));
 
   return (
     <div className="p-2 space-y-2 overflow-auto h-full">
@@ -44,7 +44,7 @@ export function ECST({ security }: { security?: Security | null }) {
         <>
           {chartData.length > 0 && (
             <div className="border border-bloomberg-border p-2">
-              <LineChart data={chartData} dataKeys={["value"]} xKey="name" height={300} colors={["#ff8c00"]} />
+              <LineChart data={chartData} dataKey="value" height={300} color="#ff8c00" />
             </div>
           )}
           <div className="border border-bloomberg-border max-h-60 overflow-auto">

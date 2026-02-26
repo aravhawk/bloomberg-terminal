@@ -23,7 +23,7 @@ export function WebSocketProvider({ children }: { children: ReactNode }) {
   const [isConnected, setIsConnected] = useState(false);
   const subscribedSymbols = useRef(new Set<string>());
   const updateQuotePrice = useSecurityStore((s) => s.updateQuotePrice);
-  const reconnectTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const reconnectTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     const apiKey = process.env.NEXT_PUBLIC_FINNHUB_API_KEY;

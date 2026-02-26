@@ -9,7 +9,7 @@ export function Heatmap({ security }: { security?: Security | null }) {
 
   if (isLoading) return <LoadingState />;
 
-  const items = (data || []).map((idx: Record<string, unknown>) => ({
+  const items: { name: string; etf: string; change: number; price: number }[] = (data || []).map((idx: Record<string, unknown>) => ({
     name: String(idx.name),
     etf: String(idx.etf),
     change: Number(idx.changePercent) || 0,

@@ -1,5 +1,5 @@
 "use client";
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, type PieLabelRenderProps } from "recharts";
 
 interface PieChartComponentProps {
   data: { name: string; value: number; color?: string }[];
@@ -22,7 +22,7 @@ export function PieChartComponent({ data, height = 250, innerRadius = 40, outerR
           outerRadius={outerRadius}
           paddingAngle={2}
           dataKey="value"
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          label={(props: PieLabelRenderProps) => `${props.name ?? ""} ${(((props.percent as number) ?? 0) * 100).toFixed(0)}%`}
           labelLine={{ stroke: "#888" }}
         >
           {data.map((entry, i) => (
