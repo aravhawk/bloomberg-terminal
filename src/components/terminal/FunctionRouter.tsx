@@ -41,6 +41,9 @@ const GIP = dynamic(() => import("@/components/functions/GIP").then((m) => ({ de
 const IPOScreen = dynamic(() => import("@/components/functions/IPO").then((m) => ({ default: m.IPO })), { loading: Loading });
 const CACS = dynamic(() => import("@/components/functions/CACS").then((m) => ({ default: m.CACS })), { loading: Loading });
 const SECF = dynamic(() => import("@/components/functions/SECF").then((m) => ({ default: m.SECF })), { loading: Loading });
+const TRADE = dynamic(() => import("@/components/functions/TRADE").then((m) => ({ default: m.TRADE })), { loading: Loading });
+const OMS = dynamic(() => import("@/components/functions/OMS").then((m) => ({ default: m.OMS })), { loading: Loading });
+const BLOTTER = dynamic(() => import("@/components/functions/BLOTTER").then((m) => ({ default: m.BLOTTER })), { loading: Loading });
 
 const FUNCTION_MAP: Record<FunctionCode, React.ComponentType<{ security?: Security | null }>> = {
   DES, GP, FA, ANR, DVD, ERN, COMP, RV,
@@ -59,6 +62,9 @@ const FUNCTION_MAP: Record<FunctionCode, React.ComponentType<{ security?: Securi
   SET: Settings,
   HELP,
   WATC: Watchlist,
+  TRADE,
+  OMS,
+  BLOTTER,
 };
 
 export function FunctionRouter({ functionCode, security }: { functionCode: FunctionCode; security: Security | null }) {

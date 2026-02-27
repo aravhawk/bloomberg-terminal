@@ -5,7 +5,7 @@ import type { Security } from "@/lib/types";
 
 export function HELP({ security }: { security?: Security | null }) {
   void security;
-  const { finnhubKey, fmpKey, alphaVantageKey, fredKey } = useSettingsStore();
+  const { finnhubKey, fmpKey, alphaVantageKey, fredKey, alpacaKeyId } = useSettingsStore();
 
   const categories = [...new Set(FUNCTION_REGISTRY.map((f) => f.category))];
 
@@ -16,6 +16,7 @@ export function HELP({ security }: { security?: Security | null }) {
     { name: "FRED", configured: !!fredKey },
     { name: "CoinGecko", configured: true },
     { name: "ExchangeRate-API", configured: true },
+    { name: "Alpaca (Paper Trading)", configured: !!alpacaKeyId },
   ];
 
   return (

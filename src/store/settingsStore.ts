@@ -6,6 +6,8 @@ interface SettingsState {
   fmpKey: string;
   alphaVantageKey: string;
   fredKey: string;
+  alpacaKeyId: string;
+  alpacaSecretKey: string;
   setApiKey: (key: string, value: string) => void;
   refreshInterval: number;
   flashPrices: boolean;
@@ -24,6 +26,8 @@ export const useSettingsStore = create<SettingsState>()(
       fmpKey: "",
       alphaVantageKey: "",
       fredKey: "",
+      alpacaKeyId: "",
+      alpacaSecretKey: "",
       setApiKey: (key, value) => set({ [key]: value }),
       refreshInterval: 15,
       flashPrices: true,

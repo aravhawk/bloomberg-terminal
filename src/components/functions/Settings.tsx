@@ -8,7 +8,7 @@ export function Settings({ security }: { security?: Security | null }) {
   const [showKeys, setShowKeys] = useState<Record<string, boolean>>({});
   const toggleKey = (key: string) => setShowKeys(prev => ({ ...prev, [key]: !prev[key] }));
   const {
-    finnhubKey, fmpKey, alphaVantageKey, fredKey,
+    finnhubKey, fmpKey, alphaVantageKey, fredKey, alpacaKeyId, alpacaSecretKey,
     setApiKey,
     refreshInterval, flashPrices, compactMode, soundEnabled,
     setRefreshInterval, setFlashPrices, setCompactMode, setSoundEnabled,
@@ -50,6 +50,23 @@ export function Settings({ security }: { security?: Security | null }) {
             <div className="flex gap-1">
               <input type={showKeys.fred ? "text" : "password"} value={fredKey} onChange={(e) => setApiKey("fredKey", e.target.value)} className="bb-input w-80" placeholder="Enter FRED API key..." />
               <button onClick={() => toggleKey("fred")} className="bb-btn text-[10px]">{showKeys.fred ? "HIDE" : "SHOW"}</button>
+            </div>
+          </div>
+          <div className="border-t border-bloomberg-border pt-2 mt-2">
+            <div className="text-bloomberg-amber font-bold text-[11px] mb-1">Alpaca Trading (Paper)</div>
+          </div>
+          <div>
+            <label className="text-[10px] text-bloomberg-muted block mb-1">Alpaca API Key ID</label>
+            <div className="flex gap-1">
+              <input type={showKeys.alpacaKey ? "text" : "password"} value={alpacaKeyId} onChange={(e) => setApiKey("alpacaKeyId", e.target.value)} className="bb-input w-80" placeholder="Enter Alpaca API Key ID..." />
+              <button onClick={() => toggleKey("alpacaKey")} className="bb-btn text-[10px]">{showKeys.alpacaKey ? "HIDE" : "SHOW"}</button>
+            </div>
+          </div>
+          <div>
+            <label className="text-[10px] text-bloomberg-muted block mb-1">Alpaca Secret Key</label>
+            <div className="flex gap-1">
+              <input type={showKeys.alpacaSecret ? "text" : "password"} value={alpacaSecretKey} onChange={(e) => setApiKey("alpacaSecretKey", e.target.value)} className="bb-input w-80" placeholder="Enter Alpaca Secret Key..." />
+              <button onClick={() => toggleKey("alpacaSecret")} className="bb-btn text-[10px]">{showKeys.alpacaSecret ? "HIDE" : "SHOW"}</button>
             </div>
           </div>
         </div>

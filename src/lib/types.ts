@@ -308,7 +308,8 @@ export type FunctionCode =
   | "SET"
   | "HELP"
   | "WATC"
-  | "BQ" | "CN" | "MGMT" | "GIP" | "IPO" | "CACS" | "SECF";
+  | "BQ" | "CN" | "MGMT" | "GIP" | "IPO" | "CACS" | "SECF"
+  | "TRADE" | "OMS" | "BLOTTER";
 
 export interface PanelTab {
   id: string;
@@ -375,4 +376,105 @@ export interface IndexProxy {
   etf: string;
   name: string;
   region: "americas" | "emea" | "apac";
+}
+
+// --- Alpaca Trading Types ---
+
+export type AlpacaOrderSide = "buy" | "sell";
+export type AlpacaOrderType = "market" | "limit" | "stop" | "stop_limit";
+export type AlpacaTimeInForce = "day" | "gtc" | "ioc" | "fok";
+export type AlpacaOrderStatus =
+  | "new"
+  | "partially_filled"
+  | "filled"
+  | "done_for_day"
+  | "canceled"
+  | "expired"
+  | "replaced"
+  | "pending_cancel"
+  | "pending_replace"
+  | "accepted"
+  | "pending_new"
+  | "accepted_without_timestamp"
+  | "stopped"
+  | "rejected"
+  | "suspended"
+  | "calculated";
+
+export interface AlpacaAccount {
+  id: string;
+  status: string;
+  currency: string;
+  buyingPower: number;
+  cash: number;
+  portfolioValue: number;
+  equity: number;
+  lastEquity: number;
+  longMarketValue: number;
+  shortMarketValue: number;
+  daytradeCount: number;
+  daytradingBuyingPower: number;
+  patternDayTrader: boolean;
+  tradingBlocked: boolean;
+  transfersBlocked: boolean;
+  accountBlocked: boolean;
+}
+
+export interface AlpacaPosition {
+  assetId: string;
+  symbol: string;
+  exchange: string;
+  assetClass: string;
+  qty: number;
+  side: string;
+  avgEntryPrice: number;
+  marketValue: number;
+  costBasis: number;
+  currentPrice: number;
+  lastdayPrice: number;
+  changeToday: number;
+  unrealizedPl: number;
+  unrealizedPlpc: number;
+  unrealizedIntradayPl: number;
+  unrealizedIntradayPlpc: number;
+}
+
+export interface AlpacaOrder {
+  id: string;
+  clientOrderId: string;
+  symbol: string;
+  qty: string | null;
+  notional: string | null;
+  filledQty: string;
+  filledAvgPrice: string | null;
+  side: AlpacaOrderSide;
+  type: AlpacaOrderType;
+  timeInForce: AlpacaTimeInForce;
+  status: AlpacaOrderStatus;
+  limitPrice: string | null;
+  stopPrice: string | null;
+  submittedAt: string;
+  filledAt: string | null;
+  canceledAt: string | null;
+  expiredAt: string | null;
+}
+
+export interface AlpacaOrderRequest {
+  symbol: string;
+  qty?: number;
+  notional?: number;
+  side: AlpacaOrderSide;
+  type: AlpacaOrderType;
+  time_in_force: AlpacaTimeInForce;
+  limit_price?: number;
+  stop_price?: number;
+}
+
+export interface AlpacaPortfolioHistory {
+  timestamp: number[];
+  equity: number[];
+  profitLoss: number[];
+  profitLossPct: number[];
+  baseValue: number;
+  timeframe: string;
 }

@@ -1,7 +1,7 @@
 # Bloomberg Terminal Clone
 
 ## Project Overview
-A Bloomberg Terminal clone built with Next.js 15 (App Router), TypeScript, and Tailwind CSS v4. Features 29 function screens mimicking Bloomberg Terminal functionality with real-time data streaming via WebSocket.
+A Bloomberg Terminal clone built with Next.js 15 (App Router), TypeScript, and Tailwind CSS v4. Features 39 function screens mimicking Bloomberg Terminal functionality with real-time data streaming via WebSocket and Alpaca paper trading integration.
 
 ## Tech Stack
 - **Framework**: Next.js 15 (App Router, Turbopack)
@@ -20,20 +20,21 @@ A Bloomberg Terminal clone built with Next.js 15 (App Router), TypeScript, and T
 - **FRED** (FRED_API_KEY): Economic indicators, Treasury yields
 - **ExchangeRate-API** (no key): Forex rates and currency conversion
 - **Alpha Vantage** (ALPHA_VANTAGE_API_KEY): Commodities (with fallback data)
+- **Alpaca** (ALPACA_API_KEY_ID + ALPACA_API_SECRET_KEY): Paper trading -- orders, positions, account, portfolio history. Set ALPACA_TRADING_ENV=paper|live to control environment.
 
 ## Architecture
 ```
 src/
   app/              # Next.js App Router pages and API routes
-    api/            # 22 API route handlers
+    api/            # 28 API route handlers (including 6 trading routes)
   components/
     charts/         # 7 chart components (CandlestickChart, LineChart, etc.)
     data-display/   # 6 reusable data display components
-    functions/      # 29 function screen components (DES, GP, FA, etc.)
+    functions/      # 39 function screen components (DES, GP, FA, TRADE, OMS, BLOTTER, etc.)
     terminal/       # 6 terminal shell components (Terminal, CommandBar, etc.)
-  hooks/            # 20 custom hooks
+  hooks/            # 24 custom hooks (including 4 Alpaca trading hooks)
   lib/
-    api/            # 6 API client modules
+    api/            # 7 API client modules (finnhub, fmp, alphavantage, fred, coingecko, exchangerate, alpaca)
     types.ts        # All TypeScript interfaces/types
     constants.ts    # Function registry, market data constants
     commands.ts     # Command bar parsing
@@ -50,6 +51,8 @@ src/
 - **Panel system**: Quad/single/dual/triple layouts with tab management and security group linking (A/B/C/D)
 - **Dynamic imports**: Function screens lazy-loaded via `next/dynamic` in FunctionRouter
 - **API routes**: All external API calls proxied through Next.js API routes (server-side keys)
+- **Trading mutations**: Alpaca hooks use TanStack Query `useMutation` with query invalidation on success
+- **Trading screens**: TRADE (order entry), OMS (order management), BLOTTER (positions/P&L)
 - **Next.js 15 params**: API route params are `Promise` and must be awaited
 - **lightweight-charts v5**: Uses `chart.addSeries(CandlestickSeries, opts)` (not `addCandlestickSeries`)
 - **Tailwind v4**: Uses `@theme inline` in CSS, no tailwind.config.ts, PostCSS via `@tailwindcss/postcss`

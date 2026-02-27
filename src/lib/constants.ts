@@ -52,6 +52,11 @@ export const FUNCTION_REGISTRY: CommandSuggestion[] = [
   { code: "IB", name: "Instant Bloomberg", description: "Chat and messaging", requiresSecurity: false, category: "Communication" },
   { code: "WATC", name: "Watchlist", description: "Custom security watchlist", requiresSecurity: false, category: "Tools" },
 
+  // Trading
+  { code: "TRADE", name: "Order Entry", description: "Place trades via Alpaca paper trading", requiresSecurity: true, category: "Trading" },
+  { code: "OMS", name: "Order Management", description: "Open orders and order history", requiresSecurity: false, category: "Trading" },
+  { code: "BLOTTER", name: "Trade Blotter", description: "Positions, P&L, and portfolio history", requiresSecurity: false, category: "Trading" },
+
   // System
   { code: "SET", name: "Settings", description: "Terminal settings and preferences", requiresSecurity: false, category: "System" },
   { code: "HELP", name: "Help", description: "Function codes reference and help", requiresSecurity: false, category: "System" },
