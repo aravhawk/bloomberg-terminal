@@ -40,7 +40,7 @@ export function PORT({ security }: { security?: Security | null }) {
   const pieData = performance?.positions.map((p) => ({ name: p.symbol, value: p.marketValue })) || [];
 
   // Fetch SPY benchmark data for performance comparison
-  const now = Math.floor(Date.now() / 1000);
+  const now = Math.floor(new Date().getTime() / 1000);
   const oneYearAgo = now - 365 * 86400;
   const { data: spyCandles } = useCandles("SPY", "D", oneYearAgo, now);
 

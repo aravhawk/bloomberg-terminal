@@ -27,7 +27,8 @@ export function YieldCurveChart({ data, height = 250 }: YieldCurveChartProps) {
             fontSize: 11,
           }}
           labelStyle={{ color: "#fb8b1e" }}
-          formatter={(value?: number) => [`${(value ?? 0).toFixed(3)}%`, "Yield"]}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          formatter={(value: any) => [`${(Number(value) ?? 0).toFixed(3)}%`, "Yield"]}
         />
         <Line
           type="monotone"

@@ -54,7 +54,7 @@ export function GP({ security }: { security?: Security | null }) {
   const symbol = security?.symbol;
   const config = TIMEFRAME_CONFIG.find((t) => t.value === timeframe) || TIMEFRAME_CONFIG[3];
 
-  const now = Math.floor(Date.now() / 1000);
+  const now = Math.floor(new Date().getTime() / 1000);
   const from = useMemo(() => {
     if (timeframe === "YTD") {
       return Math.floor(new Date(new Date().getFullYear(), 0, 1).getTime() / 1000);
