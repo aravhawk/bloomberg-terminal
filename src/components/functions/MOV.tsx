@@ -21,7 +21,7 @@ export function MOV({ security }: { security?: Security | null }) {
   const symbol = security?.symbol;
   const { data: quote, isLoading } = useStockQuote(symbol);
 
-  const now = useMemo(() => Math.floor(Date.now() / 1000), []);
+  const now = Math.floor(new Date().getTime() / 1000);
   const from = useMemo(() => now - 365 * 86400, [now]);
   const { data: candles } = useCandles(symbol, "D", from, now);
 

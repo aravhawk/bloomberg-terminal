@@ -2,6 +2,7 @@
 import { useStockQuote } from "@/hooks/useStockQuote";
 import { useStockProfile } from "@/hooks/useStockProfile";
 import { useCandles } from "@/hooks/useCandles";
+import { useMemo } from "react";
 import { PriceDisplay } from "@/components/data-display/PriceDisplay";
 import { KeyValueGrid } from "@/components/data-display/KeyValueGrid";
 import { LoadingState } from "@/components/data-display/LoadingState";
@@ -14,7 +15,7 @@ export function DES({ security }: { security?: Security | null }) {
   const { data: quote, isLoading: quoteLoading } = useStockQuote(symbol);
   const { data: profile, isLoading: profileLoading } = useStockProfile(symbol);
 
-  const now = Math.floor(Date.now() / 1000);
+  const now = Math.floor(new Date().getTime() / 1000);
   const from = now - 180 * 86400;
   const { data: candles } = useCandles(symbol, "D", from, now);
 

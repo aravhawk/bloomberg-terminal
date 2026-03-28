@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { parseCommand, getSuggestions } from "@/lib/commands";
 import { useTerminalStore } from "@/store/terminalStore";
 import { useSecurityStore } from "@/store/securityStore";
@@ -26,8 +26,8 @@ export function CommandBar() {
 
   const activePanel = panels.find((p) => p.id === activePanelId);
 
-  const debouncedSearch = useCallback(
-    debounce(async (q: string) => {
+  const debouncedSearch = useMemo(
+    () => debounce(async (q: string) => {
       if (q.length < 2) return;
       try {
         const res = await fetch(`/api/stocks/search?q=${encodeURIComponent(q)}`);
@@ -41,17 +41,20 @@ export function CommandBar() {
   );
 
   useEffect(() => {
-    if (!input.trim()) {
-      setShowDropdown(false);
-      setSuggestions([]);
-      setSearchResults([]);
-      return;
-    }
-    const funcSuggestions = getSuggestions(input);
-    setSuggestions(funcSuggestions);
-    setShowDropdown(true);
-    setSelectedIndex(0);
-    debouncedSearch(input);
+    const timeout = setTimeout(() => {
+      if (!input.trim()) {
+        setShowDropdown(false);
+        setSuggestions([]);
+        setSearchResults([]);
+        return;
+      }
+      const funcSuggestions = getSuggestions(input);
+      setSuggestions(funcSuggestions);
+      setShowDropdown(true);
+      setSelectedIndex(0);
+      debouncedSearch(input);
+    }, 0);
+    return () => clearTimeout(timeout);
   }, [input, debouncedSearch]);
 
   async function resolveSecurity(query: string): Promise<Security | null> {
